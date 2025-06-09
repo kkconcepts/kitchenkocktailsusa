@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ogImage } from '~/constants'
 
-const title = ref('About')
+const title = ref('Contact')
 const pageDescription = ref(
-  'Learn the story behind Kitchen + Kocktails — where culture, comfort food, and community come together for an unforgettable experience.'
+  'Have questions, feedback, or event inquiries? Reach out to our team and we’ll be in touch.'
 )
 
 useSeoMeta({
@@ -19,7 +19,7 @@ useSeoMeta({
 <template>
   <Contain>
     <section>
-      <h1>About</h1>
+      <h1>Contact</h1>
     </section>
   </Contain>
 </template>

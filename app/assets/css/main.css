@@ -1,12 +1,11 @@
 :root {
   --line-height: 1.3;
-  --color-primary: #6d8ca4;
-  --color-secondary: #161f2e;
-  --color-accent: #3d4d63;
-  --color-light: #f6f1e6;
-  --color-warm: #bfb0a2;
+  --color-primary: #d52020;
+  --color-secondary: #26ace2;
+  --color-accent: #af905c;
+  --color-dark: #1b1d21;
   --color-background: #ffffff;
-  --color-text: #141414;
+  --color-text: #242424;
   --color-border: #275dc5;
   --color-selection: rgb(182, 183, 187);
   --color-selection-text: #181818;
