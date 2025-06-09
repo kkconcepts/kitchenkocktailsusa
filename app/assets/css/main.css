@@ -2,7 +2,7 @@
   --line-height: 1.3;
   --color-primary: #d52020;
   --color-secondary: #26ace2;
-  --color-accent: #af905c;
+  --color-accent: #e2a368;
   --color-dark: #1b1d21;
   --color-background: #ffffff;
   --color-text: #242424;
@@ -71,7 +71,7 @@ select {
   width: 100%;
   font-size: 1rem;
   line-height: 1.5;
-  border: 1px solid #ddd;
+  /* border-bottom: 1px solid #ddd; */
 }
 
 input:focus,

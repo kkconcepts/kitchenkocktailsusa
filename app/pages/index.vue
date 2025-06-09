@@ -17,9 +17,15 @@ useSeoMeta({
 </script>
 
 <template>
-  <Contain>
-    <section>
-      <h1>Home</h1>
+  <LayoutContain>
+    <section class="section min-h-20">
+      <h1 class="text-center"></h1>
     </section>
-  </Contain>
+  </LayoutContain>
 </template>
+
+<style scoped>
+.section {
+  width: 100%;
+}
+</style>

@@ -21,7 +21,8 @@ export default defineNuxtConfig({
   site: {
     name: 'Kitchen + Kocktails USA',
     url: 'https://kitchenkocktailsusa.com',
-    description: 'Your site description',
+    description:
+      'Experience soulful Southern dining with a modern twist. Discover our signature cocktails, bold flavors, and vibrant atmosphere.',
     defaultImage: '/og-image.jpg',
     titleSeparator: '|',
     language: 'en',
