@@ -4,8 +4,9 @@
   --color-secondary: #26ace2;
   --color-accent: #e2a368;
   --color-dark: #1b1d21;
-  --color-background: #ffffff;
+  --color-background: #f9f9f9;
   --color-text: #242424;
+  --color-hover: #6a6a6a;
   --color-border: #275dc5;
   --color-selection: rgb(182, 183, 187);
   --color-selection-text: #181818;
@@ -33,7 +34,7 @@ div {
 }
 
 body {
-  font-family: 'Helvetica', sans-serif;
+  font-family: 'Josefin Sans', sans-serif;
   line-height: var(--line-height);
   font-weight: 400;
   max-width: 100vw;
@@ -42,12 +43,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
   margin: 0;
   padding: 0;
+  color: var(--color-text);
 }
 
-.a:hover,
-a:focus {
-  color: var(--color-secondary);
+a:hover {
+  color: var(--color-hover);
   text-decoration: none;
+  transition: all 0.2s ease-in-out;
 }
 
 img {

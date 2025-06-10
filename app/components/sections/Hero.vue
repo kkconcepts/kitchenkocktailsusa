@@ -1,0 +1,157 @@
+<script setup>
+import { ref, onMounted } from 'vue'
+
+const slides = ref([
+  { src: '/hero-1.jpg', alt: 'Kitchen + Kocktails Experience' },
+  { src: '/hero-2.jpg', alt: 'Signature Dishes' },
+  { src: '/hero-3.jpg', alt: 'Cocktail Selection' }
+])
+
+const currentSlide = ref(0)
+const isTransitioning = ref(false)
+
+const nextSlide = () => {
+  if (isTransitioning.value) return
+  isTransitioning.value = true
+  currentSlide.value = (currentSlide.value + 1) % slides.value.length
+  setTimeout(() => {
+    isTransitioning.value = false
+  }, 500)
+}
+
+const prevSlide = () => {
+  if (isTransitioning.value) return
+  isTransitioning.value = true
+  currentSlide.value = currentSlide.value === 0 ? slides.value.length - 1 : currentSlide.value - 1
+  setTimeout(() => {
+    isTransitioning.value = false
+  }, 500)
+}
+
+// Auto-advance slides
+onMounted(() => {
+  setInterval(nextSlide, 5000)
+})
+</script>
+
+<template>
+  <div class="hero bg-dark-800">
+    <div class="slider-container">
+      <div
+        v-for="(slide, index) in slides"
+        :key="slide.src"
+        class="slide"
+        :class="{ active: index === currentSlide }"
+      >
+        <NuxtImg :src="slide.src" :alt="slide.alt" class="slide-image" loading="eager" />
+      </div>
+
+      <!-- Navigation Arrows -->
+      <button class="nav-button prev" @click="prevSlide" :disabled="isTransitioning">
+        <Icon name="uil:angle-left" class="text-2xl" />
+      </button>
+      <button class="nav-button next" @click="nextSlide" :disabled="isTransitioning">
+        <Icon name="uil:angle-right" class="text-2xl" />
+      </button>
+
+      <!-- Slide Indicators -->
+      <div class="indicators">
+        <button
+          v-for="(_, index) in slides"
+          :key="index"
+          class="indicator"
+          :class="{ active: index === currentSlide }"
+          @click="currentSlide = index"
+        />
+      </div>
+    </div>
+  </div>
+</template>
+
+<style scoped>
+.hero {
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.slider-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.slide.active {
+  opacity: 1;
+}
+
+.slide-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  /* background: rgba(255, 255, 255, 0.2); */
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  z-index: 10;
+}
+
+.nav-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.nav-button.prev {
+  left: 20px;
+}
+
+.nav-button.next {
+  right: 20px;
+}
+
+.indicators {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+}
+
+.indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.indicator.active {
+  background: white;
+}
+</style>

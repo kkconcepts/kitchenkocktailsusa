@@ -17,11 +17,9 @@ useSeoMeta({
 </script>
 
 <template>
-  <LayoutContain>
-    <section class="section min-h-20">
-      <h1 class="text-center"></h1>
-    </section>
-  </LayoutContain>
+  <section class="section">
+    <SectionsHero />
+  </section>
 </template>
 
 <style scoped>

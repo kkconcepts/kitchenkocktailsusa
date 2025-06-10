@@ -11,18 +11,7 @@ import {
 
 import { presetFluid } from 'unocss-preset-fluid'
 
-// noinspection JSUnusedGlobalSymbols
 export default defineConfig({
-  theme: {
-    breakpoints: {
-      xs: '480px',
-      sm: '768px',
-      md: '1024px',
-      lg: '1280px',
-      xl: '1536px',
-      '2xl': '1920px'
-    }
-  },
   shortcuts: [
     // Headings with Letter Spacing
     ['t-s0', 'f-text-54-84 font-bold leading-[0.95] tracking-tight'],
@@ -51,8 +40,15 @@ export default defineConfig({
   presets: [
     presetWind3,
     presetWebFonts({
+      provider: 'google',
       fonts: {
-        sans: 'Helvetica'
+        sans: [
+          {
+            name: 'Josefin Sans',
+            weights: ['300', '400', '500', '600', '700'],
+            italic: true
+          }
+        ]
       }
     }),
     presetAttributify(),

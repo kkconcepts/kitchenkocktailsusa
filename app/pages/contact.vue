@@ -19,7 +19,7 @@ useSeoMeta({
 <template>
   <Contain>
     <section>
-      <h1>Contact</h1>
+      <h1></h1>
     </section>
   </Contain>
 </template>
