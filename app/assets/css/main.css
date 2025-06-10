@@ -8,7 +8,6 @@
   --color-text: #242424;
   --color-hover: #6a6a6a;
   --color-border: #275dc5;
-  --color-selection: rgb(182, 183, 187);
   --color-selection-text: #181818;
 }
 
@@ -82,9 +81,4 @@ select:focus {
   border-color: var(--color-border);
   outline: none;
   box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
-}
-
-::selection {
-  background: var(--color-selection);
-  color: var(--color-selection-text);
 }

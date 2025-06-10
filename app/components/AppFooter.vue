@@ -127,7 +127,12 @@ function selectCity(city) {
             <NuxtImg src="/logo-dark.png" alt="Kitchen + Kocktails" />
           </NuxtLink>
         </div>
-        <ul class="flex items-center justify-center gap-8">
+        <ul class="hidden md:flex items-center justify-center gap-7">
+          <li v-for="link in links" :key="link.name">
+            <NuxtLink :to="link.path">{{ link.label }}</NuxtLink>
+          </li>
+        </ul>
+        <ul class="flex md:hidden items-center justify-center gap-4 px-4 flex-wrap">
           <li v-for="link in links" :key="link.name">
             <NuxtLink :to="link.path">{{ link.label }}</NuxtLink>
           </li>
@@ -136,9 +141,11 @@ function selectCity(city) {
     </div>
     <div class="app-footer-middle">
       <LayoutContain>
-        <div class="grid grid-cols-3 gap-8 f-mb-100-140">
-          <div class="footer-col flex flex-col f-gap-2-4 items-start justify-start">
-            <h3 class="text-start">Get the latest updates</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 f-mb-100-140">
+          <div
+            class="footer-col flex flex-col f-gap-2-4 items-center md:items-start justify-start order-1"
+          >
+            <h3 class="text-center md:text-start">Get the latest updates</h3>
             <div class="news-input relative flex flex-row w-full max-w-250px">
               <input
                 class="w-full bg-transparent border-b border-gray-200 pr-24 pb-2 outline-none placeholder:text-gray-400"
@@ -150,60 +157,74 @@ function selectCity(city) {
               </button>
             </div>
           </div>
-          <div class="footer-col flex flex-col items-center f-gap-4-8">
-            <h3 class="text-4xl font-bold">Hours</h3>
-            <div class="relative flex flex-row f-gap-4-8 items-center">
-              <p class="font-medium">Change city</p>
-              <button
-                @click="toggleDropdown"
-                class="flex items-center text-[#E2A368] font-medium cursor-pointer"
-              >
-                {{ selectedCity }}
-                <Icon name="uil:angle-down" class="ml-1 text-sm" />
-              </button>
-              <ul
-                v-show="dropdownOpen"
-                class="absolute z-12 mt-2 bg-white text-black border border-gray-200 rounded shadow w-max text-sm"
-              >
-                <li
-                  v-for="city in cities"
-                  :key="city.name"
-                  @click="selectCity(city.name)"
-                  class="px-4 py-2 hover:bg-gray-100 cursor-pointer whitespace-nowrap"
-                >
-                  {{ city.name }}
-                </li>
-              </ul>
+          <div
+            class="footer-col flex flex-col justify-start items-center f-gap-4-8 order-3 md:order-2"
+          >
+            <h3 class="text-4xl font-bold text-center">Hours</h3>
+            <div class="relative flex flex-col items-center w-full">
+              <div class="flex items-center justify-center gap-2 mb-4">
+                <p class="font-medium">Change city</p>
+                <div class="relative inline-block">
+                  <button
+                    @click="toggleDropdown"
+                    class="flex items-center text-[#E2A368] font-medium cursor-pointer"
+                  >
+                    {{ selectedCity }}
+                    <Icon name="uil:angle-down" class="ml-1 text-sm" />
+                  </button>
+                  <ul
+                    v-show="dropdownOpen"
+                    class="absolute left-1/2 -translate-x-1/2 z-50 mt-2 bg-white text-black border border-gray-200 rounded shadow w-48 text-sm"
+                  >
+                    <li
+                      v-for="city in cities"
+                      :key="city.name"
+                      @click="selectCity(city.name)"
+                      class="px-4 py-2 hover:bg-gray-100 cursor-pointer whitespace-nowrap text-center"
+                    >
+                      {{ city.name }}
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="footer-col flex flex-col f-gap-2-4 items-end justify-start">
-            <h3 class="text-end">Stay up to date</h3>
-            <div class="social-icons text-xl flex flex-row justify-end f-gap-4-8">
+          <div
+            class="footer-col flex flex-col f-gap-2-4 items-center md:items-end justify-start order-2 md:order-3 mb-8 md:mb-0"
+          >
+            <h3 class="text-center md:text-end">Stay up to date</h3>
+            <div class="social-icons text-xl flex flex-row justify-center md:justify-end f-gap-4-8">
               <NuxtLink
                 to="https://www.facebook.com/share/193vpd2MN7/?mibextid=wwXIfr"
                 target="_blank"
                 rel="noopener noreferrer"
-                ><Icon name="uil:facebook-f"
-              /></NuxtLink>
+                class="hover:text-[#E2A368] transition-colors"
+              >
+                <Icon name="uil:facebook-f" />
+              </NuxtLink>
               <NuxtLink
                 to="https://www.facebook.com/share/193vpd2MN7/?mibextid=wwXIfr"
                 target="_blank"
                 rel="noopener noreferrer"
-                ><Icon name="uil:twitter"
-              /></NuxtLink>
+                class="hover:text-[#E2A368] transition-colors"
+              >
+                <Icon name="uil:twitter" />
+              </NuxtLink>
               <NuxtLink
                 to="https://www.instagram.com/kitchenkocktailsusa/"
                 target="_blank"
                 rel="noopener noreferrer"
-                ><Icon name="uil:instagram"
-              /></NuxtLink>
+                class="hover:text-[#E2A368] transition-colors"
+              >
+                <Icon name="uil:instagram" />
+              </NuxtLink>
             </div>
           </div>
         </div>
       </LayoutContain>
-      <div class="relative">
+      <div class="relative px-4 md:px-0">
         <div
-          class="absolute left-1/2 -translate-x-1/2 -bottom-32 bg-white border text-black p-8 shadow-md w-full max-w-4xl grid flex flex-row gap-6 text-sm z-10"
+          class="absolute left-1/2 -translate-x-1/2 -bottom-85 md:-bottom-32 bg-white border text-black p-6 shadow-sm w-[calc(100%-2rem)] md:w-full max-w-4xl flex flex-col md:flex-row gap-6 text-md z-10"
         >
           <!-- Kitchen Column -->
           <div class="flex-1">
@@ -217,7 +238,7 @@ function selectCity(city) {
           </div>
 
           <!-- Divider Line -->
-          <div class="w-px bg-gray-200 mx-4"></div>
+          <div class="hidden md:block w-px bg-gray-200" />
 
           <!-- Bar Column -->
           <div class="flex-1">
@@ -233,17 +254,22 @@ function selectCity(city) {
       </div>
     </div>
     <div class="app-footer">
-      <div class="app-footer-inner pt-44 f-gap-24-48 min-h-35vh">
-        <div class="app-footer-btm flex flex-col h-full f-gap-4-8 text-center">
-          <!-- In the lower links section -->
-          <nav>
-            <ul class="flex gap-4">
-              <li v-for="link in lowerLinks" :key="link.name">
-                <NuxtLink :to="link.path" :scroll="false">{{ link.label }}</NuxtLink>
+      <div class="app-footer-inner pt-35 f-gap-24-48 min-h-65vh md:min-h-35vh">
+        <div class="app-footer-btm flex flex-col h-full f-gap-4-8 text-center px-4 md:px-0">
+          <nav class="w-full md:overflow-visible">
+            <ul
+              class="grid grid-cols-2 md:flex md:flex-wrap justify-center gap-4 md:gap-7 w-full md:min-w-0 mb-4 md:mb-0"
+            >
+              <li v-for="link in lowerLinks" :key="link.name" class="text-center">
+                <NuxtLink :to="link.path" :scroll="false" class="text-sm md:text-base">{{
+                  link.label
+                }}</NuxtLink>
               </li>
             </ul>
           </nav>
-          <p class="text-[#E2A368]">© Kitchen + Kocktails by Kevin Kelley</p>
+          <p class="text-[#E2A368] text-sm md:text-base break-words">
+            © Kitchen + Kocktails by Kevin Kelley
+          </p>
         </div>
       </div>
     </div>
@@ -258,6 +284,7 @@ function selectCity(city) {
   z-index: 1;
   background-color: #1b1d21;
   color: #fff;
+  border-top: 4px solid var(--color-accent);
 }
 
 .app-footer-inner {

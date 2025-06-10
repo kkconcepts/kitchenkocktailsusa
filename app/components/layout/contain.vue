@@ -7,5 +7,8 @@
 <style scoped>
 .content {
   margin: 0 auto;
+  width: 100%;
+  height: auto;
+  max-width: 1440px;
 }
 </style>

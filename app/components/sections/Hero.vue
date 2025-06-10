@@ -47,12 +47,14 @@ onMounted(() => {
       </div>
 
       <!-- Navigation Arrows -->
-      <button class="nav-button prev" @click="prevSlide" :disabled="isTransitioning">
-        <Icon name="uil:angle-left" class="text-2xl" />
-      </button>
-      <button class="nav-button next" @click="nextSlide" :disabled="isTransitioning">
-        <Icon name="uil:angle-right" class="text-2xl" />
-      </button>
+      <div class="navigation-arrows hidden">
+        <button class="nav-button prev" @click="prevSlide" :disabled="isTransitioning">
+          <Icon name="uil:angle-left" class="text-2xl" />
+        </button>
+        <button class="nav-button next" @click="nextSlide" :disabled="isTransitioning">
+          <Icon name="uil:angle-right" class="text-2xl" />
+        </button>
+      </div>
 
       <!-- Slide Indicators -->
       <div class="indicators">
