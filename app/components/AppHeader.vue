@@ -8,6 +8,7 @@ const navigationLinks = [
   { path: '/menu', label: 'Our Menu' },
   { path: '/locations', label: 'Locations' },
   { path: '/private-events', label: 'Private Events' },
+  { path: '/events', label: 'Events' },
   { path: '/about', label: 'About' },
   { path: '/contact', label: 'Contact' }
 ]
@@ -70,7 +71,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <header class="fixed top-0 bg-white/97 bg-blur left-0 w-full z-50 border-b border-gray-200">
+  <header class="fixed top-0 text-white left-0 w-full z-50 border-b border-gray-200">
     <LayoutContain>
       <nav class="mx-auto py-2 h-20 flex items-center">
         <!-- Logo -->
@@ -97,7 +98,7 @@ onUnmounted(() => {
           <div class="relative group">
             <button
               id="ordering-button"
-              class="bg-primary/10 text-primary px-6 py-2 rounded-full hover:bg-primary/20 transition-colors duration-200 flex items-center"
+              class="bg-primary/10 color-[#e2a368] text-primary px-6 py-2 rounded-full hover:bg-primary/20 transition-colors duration-200 flex items-center"
             >
               Order Online
               <Icon
@@ -109,7 +110,7 @@ onUnmounted(() => {
             <!-- Dropdown Menu -->
             <div
               id="ordering-dropdown"
-              class="invisible group-hover:visible opacity-0 group-hover:opacity-100 absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50 transition-all duration-200"
+              class="invisible group-hover:visible opacity-0 group-hover:opacity-100 absolute top-full left-0 mt-2 w-48 bg-white rounded shadow-lg z-50 transition-all duration-200"
             >
               <a
                 v-for="city in cities"
@@ -177,7 +178,7 @@ onUnmounted(() => {
                 class="bg-primary/10 text-primary px-8 py-3 hover:bg-primary/20 transition-colors duration-200 text-xl text-center"
                 @click="isMenuOpen = false"
               >
-                Online Ordering
+                Order Online
               </NuxtLink>
               <NuxtLink
                 to="/reservations"

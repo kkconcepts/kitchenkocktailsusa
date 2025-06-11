@@ -35,7 +35,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="hero bg-dark-800">
+  <div class="hero bg-brand-dark relative">
     <div class="slider-container">
       <div
         v-for="(slide, index) in slides"
@@ -67,12 +67,29 @@ onMounted(() => {
         />
       </div>
     </div>
+
+    <div
+      class="hidden absolute bottom-0 left-0 right-0 p-4 bg-dark-400/95 backdrop-blur-sm text-white"
+    >
+      <div class="grid grid-cols-2 f-gap-16-24">
+        <NuxtLink
+          to="/menu"
+          class="bg-red-600 hover:bg-red-700 transition-colors duration-200 flex items-center justify-center h-10"
+          >Our Menu</NuxtLink
+        >
+        <NuxtLink
+          to="/reservations"
+          class="bg-red-600 hover:bg-red-700 transition-colors duration-200 flex items-center justify-center h-10"
+          >Reservations</NuxtLink
+        >
+      </div>
+    </div>
   </div>
 </template>
 
 <style scoped>
 .hero {
-  height: 100vh;
+  height: 100dvh;
   position: relative;
   overflow: hidden;
 }
@@ -135,17 +152,18 @@ onMounted(() => {
 
 .indicators {
   position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
   display: flex;
+  flex-direction: column;
   gap: 10px;
   z-index: 10;
 }
 
 .indicator {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.5);
   border: none;

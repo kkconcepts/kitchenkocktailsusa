@@ -1,8 +1,8 @@
-<script setup lang="ts">
-import { SpeedInsights } from '@vercel/speed-insights/vue'
-</script>
-
 <template>
-  <SpeedInsights />
-  <slot />
+  <div class="page">
+    <SpeedInsights />
+    <slot />
+  </div>
 </template>
+
+<style scoped></style>

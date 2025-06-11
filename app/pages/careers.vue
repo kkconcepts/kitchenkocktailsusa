@@ -6,6 +6,8 @@ const pageDescription = ref(
   'Join the team at Kitchen + Kocktails by Kevin Kelley. Discover career opportunities in upscale dining, hospitality, and guest experience.'
 )
 
+const pageClass = computed(() => `page page-${title.value.toLowerCase()}`)
+
 const expandedJob = ref(null)
 const selectedLocation = ref('all')
 const selectedRoleType = ref('all')
@@ -121,13 +123,14 @@ useSeoMeta({
 </script>
 
 <template>
-  <div class="page">
-    <section class="min-h-100vh max-w-3xl m-auto f-py-120-180">
+  <div :class="pageClass">
+    <section class="min-h-100vh max-w-3xl m-auto f-py-160-180">
       <LayoutContain>
         <div class="flex flex-col f-gap-32-48">
-          <h1 class="text-4xl text-center font-bold">{{ title }}</h1>
-          <p class="text-lg text-center">{{ pageDescription }}</p>
-          <div class="border-color-[#e2a368] divider border"></div>
+          <div class="flex flex-col">
+            <h1 class="text-4xl text-center font-bold mb-10">{{ title }}</h1>
+            <p class="text-lg text-center">{{ pageDescription }}</p>
+          </div>
 
           <!-- Filters -->
           <div class="flex flex-col sm:flex-row gap-4 sm:gap-6">

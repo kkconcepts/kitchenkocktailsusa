@@ -1,10 +1,12 @@
-<script setup lang="ts">
+<script setup>
 import { ogImage } from '~/constants'
 
 const title = ref('Menu')
 const pageDescription = ref(
   'Explore our full menu featuring Southern classics, modern favorites, and handcrafted cocktails served with style.'
 )
+
+const pageClass = computed(() => `page page-${title.value.toLowerCase()}`)
 
 useSeoMeta({
   title: title,
@@ -17,9 +19,11 @@ useSeoMeta({
 </script>
 
 <template>
-  <Contain>
-    <section>
-      <h1></h1>
-    </section>
-  </Contain>
+  <div :class="pageClass">
+    <LayoutContain>
+      <section>
+        <h1></h1>
+      </section>
+    </LayoutContain>
+  </div>
 </template>

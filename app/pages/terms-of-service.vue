@@ -6,6 +6,8 @@ const pageDescription = ref(
   'See how Kitchen + Kocktails by Kevin Kelley collects, uses & safeguards your personal data. Transparent, secure, and customer‑focused.'
 )
 
+const pageClass = computed(() => `page page-${title.value.toLowerCase()}`)
+
 useSeoMeta({
   title: title,
   ogTitle: title,
@@ -17,108 +19,101 @@ useSeoMeta({
 </script>
 
 <template>
-  <div class="page">
-    <section class="min-h-100vh max-w-3xl m-auto f-py-120-180">
+  <div :class="pageClass">
+    <section class="min-h-100vh max-w-3xl m-auto f-py-160-180">
       <LayoutContain>
         <div class="flex flex-col f-gap-32-48">
-          <h1 class="text-4xl text-center font-bold">{{ title }}</h1>
-          <p class="text-lg text-center">{{ pageDescription }}</p>
-          <div class="border-color-[#e2a368] divider border"></div>
-          <p>
-            <strong>Privacy Policy</strong>
-            <br />
-            Keeping customer information private is a priority for Kitchen + Kocktails By: Kevin
-            Kelley. To enable us to provide you with relevant information, we need to collect
-            certain information from you. However, we want to emphasize that we are committed to
-            maintaining the privacy of this information.
-            <br /><br />
-            <strong>Information</strong>
-            <br />
-            We Collect We collect non-public personal information about you from the following
-            sources: Information we receive from you on applications or other forms (such as your
-            name, address, address, email address, and phone number).
-            <br /><br />
-            <strong>Cookies</strong>
-            <br />
-            Please do not submit any confidential, proprietary or sensitive personally identifiable
-            information (e.g. Social Security Number; driver’s license number; or credit card, bank
-            account or other financial information). If you do you do so at your own risk and we
-            will not be liable to you or responsible for consequences of your submission.
-            <br /><br />
-            <strong>Information We Share</strong>
-            <br />
-            We do not disclose any non-public personal information about our customers or former
-            customers to any non-affiliated entity except as described below and otherwise required
-            by law. We may disclose all of the information we collect, as described above, to
-            provider companies that assist us in the servicing or administration of the service you
-            have requested or authorized. When information is shared with companies that perform
-            services on our behalf, we protect against the subsequent disclosure of that
-            information. In no event do we disclose your personal information to companies that will
-            use that information to contact you about their own products or services.
-            <br /><br />
-            We may also disclose your personal information if required to do so by law (for example,
-            a subpoena) or regulation, or in good faith to:
-            <br />
-            (a) comply with legal process served on us or
-            <br />
-            (b) protect our rights and property
-            <br /><br />
-            <strong>Use of Web Server Logs and Cookies</strong>
-            <br />
-            When you visit our website, we may track information about your visit and store that
-            information in web server logs, which are records of the activities on our sites. The
-            servers automatically capture and save the information electronically. Examples of the
-            information we may collect include: your unique Internet protocol address; the name of
-            your unique Internet service provider; the town/city, county/state and country from
-            which you access our website; the kind of browser or computer you use; the number of
-            links you click within the site; the date and time of your visit; the web page from
-            which you arrived to our site; the pages you viewed on the site; and certain
-            searches/queries that you conducted via our website(s). The information we collect in
-            web server logs helps us administer the site, analyze its usage, protect the website and
-            its content from inappropriate use and improve the user’s experience.
-            <br /><br />
-            In order to offer and provide a customized and personal service, our websites and
-            applications may use cookies to store and help track information about you. Cookies are
-            simply small pieces of data that are sent to your browser from a Web server and stored
-            on your computer’s hard drive. We use cookies to help remind us who you are and to help
-            you navigate our sites during your visits. Cookies allow us to save passwords and
-            preferences for you so you won’t have to re-enter them each time you visit. The use of
-            cookies is relatively standard. Most browsers are initially set up to accept cookies.
-            However, if you prefer, you can set your browser to either notify you when you receive a
-            cookie, or to refuse to accept cookies. You should understand that some features of many
-            sites may not function properly if you don’t accept cookies.
-            <br /><br />
-            <strong>Our Security Procedures</strong>
-            <br />
-            We restrict access to non-public personal information about you to those persons who
-            need such information to provide products or services to you. We maintain physical,
-            electronic and procedural safeguards that comply with applicable regulations to guard
-            your non-public personal information. However, we cannot guarantee that unauthorized
-            persons will always be unable to defeat our security measures.
-            <br /><br />
-            <strong>Changes to Privacy Policy</strong>
-            <br />
-            Kitchen + Kocktails By: Kevin Kelley reserves the right, in its sole discretion, to
-            revise, change, or modify this Privacy Policy at time. We will incorporate all material
-            changes to this Privacy Policy on this page and will provide advance notice to you. Such
-            notice may be given in any manner we choose that complies with law, including, but not
-            limited to posting a notice of such changes on the Web Sites. We encourage you to review
-            this page periodically for the most recent version of this Privacy Policy. Any use by a
-            User of the Web Sites following notice of such changes shall be deemed to constitute
-            acceptance by that User of those changes to the Privacy Policy.
-            <br /><br />
-            <strong>Questions</strong>
-            <br />
-            If you have questions about this Notice, or would like to review or make changes to your
-            personal information, please e-mail us at
-            <a
-              href="mailto:info@kitchenkocktailsusa.com"
-              class="underline hover:text-primary transition-colors"
-              target="_blank"
-              rel="noopener noreferrer"
-              >info@kitchenkocktailsusa.com</a
-            >.
-          </p>
+          <div class="flex flex-col">
+            <h1 class="text-4xl text-center font-bold mb-10">{{ title }}</h1>
+            <p class="text-lg text-center">
+              By accessing or using the Kitchen + Kocktails website, you agree to be bound by these
+              Terms of Service. Please read them carefully before using our site or services.
+            </p>
+          </div>
+          <div class="border-color-[#e2a368] divider border" />
+          <div class="flex flex-col">
+            <h2 class="text-2xl font-bold mb-4">Use of Our Website</h2>
+            <p>
+              Kitchen + Kocktails provides this website for viewing menus, making reservations,
+              ordering food online, booking private events, and accessing promotional content. You
+              agree to use the site only for lawful purposes.
+            </p>
+          </div>
+          <div class="border-color-[#e2a368] divider border" />
+          <div class="flex flex-col">
+            <h3 class="text-xl font-bold mb-6">Terms & Conditions Overview</h3>
+            <p>
+              <strong>Terms of Service</strong>
+              <br />
+              Kitchen + Kocktails provides this website for viewing menus, making reservations,
+              ordering food online, booking private events, and accessing promotional content. You
+              agree to use the site only for lawful purposes.
+              <br /><br />
+              <strong>Online Orders and Reservations</strong>
+              <br />
+              When placing an order or reservation through our website or third-party platforms
+              (such as ToastTab or OpenTable), you agree to provide accurate and complete
+              information. We reserve the right to cancel or refuse any order or reservation at our
+              discretion.
+              <br /><br />
+              <strong>Payments and Refunds</strong>
+              <br />
+              All prices listed are in U.S. dollars. Payments made online are securely processed
+              through our third-party payment providers. Refunds, if applicable, are handled in
+              accordance with our Cancellation and Refund Policy.
+              <br /><br />
+              <strong>Cancellation and No-Show Policy</strong>
+              <br />
+              For reservations and private event bookings, cancellations must be made within the
+              specified timeframe noted during booking. No-shows or late cancellations may result in
+              a fee.
+              <br /><br />
+              <strong>Loyalty Programs and Promotions</strong>
+              <br />
+              If enrolled in any loyalty or rewards programs, participation is subject to the
+              specific terms outlined during registration. Offers and promotions may be subject to
+              change or termination without notice.
+              <br /><br />
+              <strong>Intellectual Property</strong>
+              <br />
+              All content on this website—including logos, text, photos, and designs—is the property
+              of Kitchen + Kocktails or its licensors and may not be used without prior written
+              consent.
+              <br /><br />
+              <strong>User Content</strong>
+              <br />
+              If you submit feedback, reviews, or other content, you grant us a non-exclusive,
+              royalty-free license to use, reproduce, and display it for promotional or operational
+              purposes.
+              <br /><br />
+              <strong>Limitation of Liability</strong>
+              <br />
+              We are not liable for any direct or indirect damages resulting from your use of this
+              website, including reservation issues, service outages, or pricing errors.
+              <br /><br />
+              <strong>Third-Party Links</strong>
+              <br />
+              Our website may contain links to third-party platforms. We are not responsible for the
+              content, privacy practices, or terms of those sites.
+              <br /><br />
+              <strong>Changes to These Terms</strong>
+              <br />
+              We may update these Terms of Service from time to time. Continued use of the website
+              constitutes acceptance of any changes.
+              <br /><br />
+              <strong>Contact Us</strong>
+              <br />
+              If you have questions about these terms, or would like to review or would like to
+              discuss further, please e-mail us at
+              <a
+                href="mailto:info@kitchenkocktailsusa.com"
+                class="underline hover:text-brand-accent duration-200 transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+                >info@kitchenkocktailsusa.com</a
+              >.
+            </p>
+          </div>
         </div>
       </LayoutContain>
     </section>

@@ -4,8 +4,8 @@
   --color-secondary: #26ace2;
   --color-accent: #e2a368;
   --color-dark: #1b1d21;
-  --color-background: #f9f9f9;
-  --color-text: #242424;
+  --color-background: rgb(245, 244, 240);
+  --color-text: rgb(46, 46, 48);
   --color-hover: #6a6a6a;
   --color-border: #275dc5;
   --color-selection-text: #181818;
@@ -46,9 +46,6 @@ body {
 }
 
 a:hover {
-  color: var(--color-hover);
-  text-decoration: none;
-  transition: all 0.2s ease-in-out;
 }
 
 img {

@@ -12,6 +12,16 @@ import {
 import { presetFluid } from 'unocss-preset-fluid'
 
 export default defineConfig({
+  theme: {
+    colors: {
+      brandColor: '#d52020',
+      brandSecondary: '#26ace2',
+      brandAccent: '#e2a368',
+      brandLight: '#F5F4F0',
+      brandDark: '#1b1d21',
+      brandText: '#2E2E30'
+    }
+  },
   shortcuts: [
     // Headings with Letter Spacing
     ['t-s0', 'f-text-54-84 font-bold leading-[0.95] tracking-tight'],

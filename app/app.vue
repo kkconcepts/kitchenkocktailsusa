@@ -13,23 +13,17 @@ useSeoMeta({
 
 <template>
   <div id="__layout">
-    <AppHeader />
+    <AppHeaderAlt />
     <main id="main" role="main">
       <NuxtLayout>
         <NuxtPage />
+        <AppFooter />
       </NuxtLayout>
     </main>
-    <AppFooter />
   </div>
 </template>
 
 <style>
-html {
-  box-sizing: border-box;
-  scroll-behavior: smooth;
-  scroll-padding-top: 100px;
-}
-
 #__nuxt {
   margin: 0;
   padding: 0;
@@ -38,5 +32,19 @@ html {
 #main {
   display: block;
   unicode-bidi: isolate;
+}
+
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.25s;
+}
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+  filter: blur(0.5rem);
+}
+
+.page {
+  min-height: 100vh;
 }
 </style>

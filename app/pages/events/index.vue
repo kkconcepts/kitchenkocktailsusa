@@ -1,9 +1,9 @@
 <script setup>
 import { ogImage } from '~/constants'
 
-const title = ref('Reserve a Table')
+const title = ref('Events')
 const pageDescription = ref(
-  'Book your table online at any of our locations. Whether it’s a night out or private event, reserve your spot today.'
+  'Explore our full menu featuring Southern classics, modern favorites, and handcrafted cocktails served with style.'
 )
 
 const pageClass = computed(() => `page page-${title.value.toLowerCase()}`)
