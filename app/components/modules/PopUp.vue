@@ -26,7 +26,7 @@ const handleClose = () => {
     <div v-if="isOpen" class="fixed inset-0 z-51 flex items-center justify-center p-8 md:p-0">
       <div class="fixed inset-0 bg-zinc-900/80" @click="handleClose"></div>
       <div
-        class="relative w-full max-w-lg bg-dark-800 shadow-md transform transition-all overflow-hidden mx-auto md:rounded-none"
+        class="relative w-full max-w-md bg-dark-800 shadow-md transform transition-all overflow-hidden mx-auto md:rounded-none"
         @click.stop
       >
         <button

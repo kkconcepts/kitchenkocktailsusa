@@ -184,9 +184,7 @@ function selectCity(city) {
                     >
                       <span class="relative">
                         {{ city.name }}
-                        <span
-                          class="absolute -right-3 top-1/2 -translate-y-1/2 w-2 h-2 bg-red-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
-                        ></span>
+                        <span class="absolute -right-3 top-1/2 -translate-y-1/2 w-2 h-2 bg-red-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
                       </span>
                     </li>
                   </ul>
@@ -263,7 +261,7 @@ function selectCity(city) {
         <div class="app-footer-btm flex flex-col h-full f-gap-4-8 text-center px-4 md:px-0">
           <nav class="w-full md:overflow-visible">
             <ul
-              class="grid grid-cols-2 md:flex md:flex-wrap justify-center gap-2.5 md:gap-7 w-full md:min-w-0 mb-7 md:mb-0"
+              class="grid grid-cols-2 md:flex md:flex-wrap justify-center gap-4 md:gap-7 w-full md:min-w-0 mb-4 md:mb-0"
             >
               <li v-for="link in lowerLinks" :key="link.name" class="text-center">
                 <NuxtLink :to="link.path" :scroll="false" class="text-sm md:text-base">{{
