@@ -64,8 +64,6 @@ const formatCityName = (city) => cityNames[city] || city
     <section class="min-h-100vh max-w-6xl m-auto f-py-160-180">
       <LayoutContain>
         <div class="flex flex-col f-gap-32-48">
-          <!-- Remove the old back navigation -->
-
           <!-- Event Header -->
           <div class="flex flex-col items-center text-center mb-12">
             <h1 class="text-4xl font-bold mb-8">{{ event.title }}</h1>

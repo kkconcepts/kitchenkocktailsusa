@@ -98,8 +98,4 @@ const formatDate = (date) => {
   </div>
 </template>
 
-<style scoped>
-.page-events {
-  @apply bg-white;
-}
-</style>
+<style scoped></style>
