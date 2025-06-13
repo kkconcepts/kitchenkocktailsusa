@@ -119,7 +119,7 @@ function selectCity(city) {
 </script>
 
 <template>
-  <div class="footer">
+  <div class="footer bg-white">
     <div class="app-footer-top f-pt-24-48 f-mb-64-72">
       <nav>
         <div class="logo w-45 m-auto mb-12">
@@ -167,7 +167,7 @@ function selectCity(city) {
                 <div class="relative inline-block">
                   <button
                     @click="toggleDropdown"
-                    class="flex items-center text-cool-gray-400 font-medium cursor-pointer"
+                    class="flex items-center text-brand-accent font-medium cursor-pointer"
                   >
                     {{ selectedCity }}
                     <Icon name="uil:angle-down" class="ml-1 text-sm" />
@@ -184,9 +184,6 @@ function selectCity(city) {
                     >
                       <span class="relative">
                         {{ city.name }}
-                        <span
-                          class="absolute -right-3 top-1/2 -translate-y-1/2 w-2 h-2 bg-red-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
-                        ></span>
                       </span>
                     </li>
                   </ul>
@@ -203,7 +200,7 @@ function selectCity(city) {
                 to="https://www.facebook.com/share/193vpd2MN7/?mibextid=wwXIfr"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="hover:text-[#E2A368] transition-colors"
+                class="hover:text-brand-accent transition-colors"
               >
                 <Icon name="uil:facebook-f" />
               </NuxtLink>
@@ -211,7 +208,7 @@ function selectCity(city) {
                 to="https://www.facebook.com/share/193vpd2MN7/?mibextid=wwXIfr"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="hover:text-[#E2A368] transition-colors"
+                class="hover:text-brand-accent transition-colors"
               >
                 <Icon name="uil:twitter" />
               </NuxtLink>
@@ -219,7 +216,7 @@ function selectCity(city) {
                 to="https://www.instagram.com/kitchenkocktailsusa/"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="hover:text-[#E2A368] transition-colors"
+                class="hover:text-brand-accent transition-colors"
               >
                 <Icon name="uil:instagram" />
               </NuxtLink>
@@ -229,7 +226,7 @@ function selectCity(city) {
       </LayoutContain>
       <div class="relative px-4 md:px-0">
         <div
-          class="absolute left-1/2 -translate-x-1/2 -bottom-85 md:-bottom-32 bg-white border-brand-accent border-4 text-black p-6 shadow-sm w-[calc(100%-2rem)] md:w-full max-w-4xl flex flex-col md:flex-row gap-6 text-md z-10"
+          class="absolute left-1/2 -translate-x-1/2 -bottom-85 md:-bottom-32 bg-warmGray-50 border-brand-accent border-4 text-black p-6 shadow-sm w-[calc(100%-2rem)] md:w-full max-w-4xl flex flex-col md:flex-row gap-6 text-md z-10"
         >
           <!-- Kitchen Column -->
           <div class="flex-1">
@@ -258,7 +255,7 @@ function selectCity(city) {
         </div>
       </div>
     </div>
-    <div class="app-footer">
+    <div class="app-footer border-brand-accent border-t-4">
       <div class="app-footer-inner pt-35 f-gap-24-48 min-h-65vh md:min-h-35vh">
         <div class="app-footer-btm flex flex-col h-full f-gap-4-8 text-center px-4 md:px-0">
           <nav class="w-full md:overflow-visible">
@@ -272,7 +269,7 @@ function selectCity(city) {
               </li>
             </ul>
           </nav>
-          <p class="text-[#E2A368] text-sm md:text-base break-words">
+          <p class="text-brand-accent text-sm md:text-base break-words">
             © Kitchen + Kocktails by Kevin Kelley
           </p>
         </div>
@@ -289,7 +286,6 @@ function selectCity(city) {
   z-index: 1;
   background-color: #1b1d21;
   color: #fff;
-  border-top: 4px solid var(--color-accent);
 }
 
 .app-footer-inner {

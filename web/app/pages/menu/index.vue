@@ -113,21 +113,51 @@ const productTypes = [
 </script>
 
 <template>
-  <div class="page page-menu">
+  <div class="page page-menu bg-light-200">
     <AppHeader>
       <template #menu-categories>
-        <div class="w-full shadow-sm backdrop-blur-md">
+        <!-- Location Dropdown Section -->
+        <div class="w-full bg-brand-light py-3">
           <div class="container mx-auto">
-            <div class="h-16 flex items-center justify-center space-x-4">
+            <div class="flex justify-end">
+              <div class="flex items-center whitespace-nowrap">
+                <span class="text-gray-600 font-medium">Ordering From</span>
+                <div class="relative inline-flex items-center ml-2">
+                  <Icon
+                    name="uil:location-point"
+                    class="absolute left-2 text-brand-accent w-4 h-4"
+                  />
+                  <select
+                    v-model="selectedCity"
+                    class="bg-white pl-8 pr-8 py-1 appearance-none focus:outline-none font-medium border border-cool-gray-300 rounded-md"
+                  >
+                    <option v-for="city in cities" :key="city.value" :value="city.value">
+                      {{ city.label }}
+                    </option>
+                  </select>
+                  <Icon name="uil:angle-down" class="absolute right-2 text-brand-accent w-4 h-4" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Existing Filters Section remains unchanged -->
+        <div
+          class="w-full shadow-sm bg-white backdrop-blur-xl border-t border-t-cool-gray-300 border-b border-b-cool-gray-200"
+        >
+          <div class="container mx-auto">
+            <div class="h-14 flex items-center justify-center space-x-4">
+              <!-- Existing search and filters remain unchanged -->
               <!-- Add search input -->
               <div class="relative flex items-center mr-4">
                 <input
                   v-model="searchQuery"
                   type="text"
                   placeholder="Search menu..."
-                  class="pl-10 pr-4 py-2 border-gray-300 focus:outline-none focus:border-primary text-gray-900"
+                  class="pl-10 pr-4 py-1.5 rounded border border-true-gray-300 focus:outline-none focus:border-primary text-gray-900"
                 />
-                <Icon name="uil:search" class="absolute left-3 text-cool-gray-600 w-4.5 h-4.5" />
+                <Icon name="uil:search" class="absolute left-3 text-gray-600 w-4.5 h-4.5" />
               </div>
 
               <!-- Existing type filters -->
@@ -137,8 +167,8 @@ const productTypes = [
                     :class="[
                       'transition-colors duration-200 whitespace-nowrap',
                       selectedType === type.value
-                        ? 'text-red-600'
-                        : 'text-cool-gray-700 hover:text-red-600'
+                        ? 'text-brand-accent font-medium'
+                        : 'text-gray-500 font-medium hover:text-brand-accent'
                     ]"
                   >
                     {{ type.label.replace('All Items', 'Menu') }}
@@ -146,7 +176,7 @@ const productTypes = [
                 </button>
                 <span
                   v-if="index < productTypes.length - 1"
-                  class="text-cool-gray-400 select-none"
+                  class="text-cool-gray-300 select-none"
                   aria-hidden="true"
                 >
                   |
@@ -161,7 +191,7 @@ const productTypes = [
     <!-- Main content -->
     <LayoutContain>
       <section>
-        <div class="container mx-auto f-py-160-180">
+        <div class="container mx-auto f-py-160-250">
           <div class="space-y-14">
             <!-- Page Title -->
             <div class="text-center">
@@ -178,29 +208,12 @@ const productTypes = [
               </p>
             </div>
 
-            <!-- City Filter Buttons -->
-            <div class="flex justify-center gap-2 mb-16 f-text-13-15">
-              <button
-                v-for="city in cities"
-                :key="city.value"
-                @click="selectedCity = city.value"
-                :class="[
-                  'px-6 py-2 transition-colors border',
-                  selectedCity === city.value
-                    ? 'bg-red-600 text-white'
-                    : 'bg-white text-gray-500 hover:border-red-600'
-                ]"
-              >
-                {{ city.label.replace('All Locations', '') }}
-              </button>
-            </div>
-
             <!-- Menu Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-4 mt-12">
               <div
                 v-for="item in filteredItems"
                 :key="item._id"
-                class="bg-white overflow-hidden shadow-md backdrop-blur-lgs"
+                class="overflow-hidden shadow-md backdrop-blur-lg bg-white"
               >
                 <NuxtLink :to="`/menu/${item.slug}`" class="block">
                   <NuxtImg :src="item.imageUrl" :alt="item.name" class="w-full h-48 object-cover" />

@@ -94,15 +94,51 @@ useSeoMeta({
     }
   ]
 })
+
+// Add cities array with all locations
+const cities = [
+  { label: 'Atlanta', value: 'atlanta' },
+  { label: 'Charlotte', value: 'charlotte' },
+  { label: 'Chicago', value: 'chicago' },
+  { label: 'Dallas', value: 'dallas' },
+  { label: 'Washington, D.C.', value: 'washington-dc' }
+]
 </script>
 
 <template>
   <div class="page page-menu-item bg-light-500">
     <AppHeader>
       <template #menu-categories>
-        <div class="w-full shadow-sm backdrop-blur-md">
+        <!-- Location Dropdown Section -->
+        <div class="w-full bg-stone-50 py-3">
           <div class="container mx-auto">
-            <div class="h-16 flex items-center justify-start px-4 space-x-2 text-gray-700">
+            <div class="flex justify-end">
+              <div class="flex items-center whitespace-nowrap">
+                <span class="text-gray-600 font-medium">Ordering From</span>
+                <div class="relative inline-flex items-center ml-2">
+                  <Icon
+                    name="uil:location-point"
+                    class="absolute left-2 text-brand-accent w-4 h-4"
+                  />
+                  <select
+                    v-model="selectedCity"
+                    class="bg-white pl-8 pr-8 py-1 appearance-none focus:outline-none font-medium border border-cool-gray-300 rounded-md"
+                  >
+                    <option v-for="city in cities" :key="city.value" :value="city.value">
+                      {{ city.label }}
+                    </option>
+                  </select>
+                  <Icon name="uil:angle-down" class="absolute right-2 text-brand-accent w-4 h-4" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Existing breadcrumb navigation -->
+        <div class="w-full border-t-cool-gray-300 border-t shadow-sm backdrop-blur-md">
+          <div class="container mx-auto">
+            <div class="h-14 flex items-center justify-start px-4 space-x-2 text-gray-700">
               <NuxtLink to="/menu" class="hover:text-primary transition-colors duration-200">
                 Back to Menu
               </NuxtLink>

@@ -17,7 +17,15 @@ export default defineNuxtConfig({
     host: '0.0.0.0',
     port: 3000
   },
-  modules: ['@unocss/nuxt', '@nuxt/image', '@nuxt/icon', '@nuxtjs/seo', '@nuxtjs/sanity'],
+  modules: [
+    '@unocss/nuxt',
+    '@nuxt/image',
+    '@nuxt/icon',
+    '@nuxtjs/seo',
+    '@nuxtjs/sanity',
+    '@nuxtjs/leaflet',
+    'nuxt-mapbox'
+  ],
   site: {
     name: 'Kitchen + Kocktails USA',
     url: 'https://kitchenkocktailsusa.com',
@@ -39,6 +47,9 @@ export default defineNuxtConfig({
     dataset: process.env.SANITY_DATASET,
     apiVersion: '2024-01-01',
     useCdn: false
+  },
+  mapbox: {
+    accessToken: process.env.MAPBOX_API_TOKEN
   },
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },

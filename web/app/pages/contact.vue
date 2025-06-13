@@ -49,22 +49,44 @@ useSeoMeta({
 </script>
 
 <template>
-  <div class="bg-light-400" :class="pageClass">
-    <section class="min-h-100vh max-w-2xl mx-auto f-py-160-180">
-      <div class="flex flex-col f-gap-32-48">
-        <!-- Page Header -->
-        <div class="flex flex-col items-center text-center">
-          <h1 class="text-4xl font-bold mb-10 uppercase">Contact</h1>
-          <p class="text-lg">
-            Have questions, feedback, or event inquiries? Reach out to our team and we'll be in
-            touch.
-          </p>
+  <div :class="pageClass">
+    <section class="container mx-auto f-py-160-180">
+      <div class="grid grid-cols-2 gap-16">
+        <!-- Left Column: Contact Info -->
+        <div class="flex flex-col gap-12">
+          <div class="max-w-340px">
+            <h1 class="text-4xl font-bold mb-6">CONTACT US</h1>
+            <p class="text-gray-600">
+              Have questions, feedback, or event inquiries? Reach out to our team and we'll be in
+              touch.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="text-2xl font-bold mb-4">EMAIL</h2>
+            <p>General Inquiries:</p>
+            <a
+              href="mailto:info@kitchenkocktailsusa.com"
+              class="text-gray-600 hover:text-red-600 transition-colors"
+            >
+              info@kitchenkocktailsusa.com
+            </a>
+          </div>
+
+          <div>
+            <h2 class="text-2xl font-bold mb-4">SOCIALS</h2>
+            <div class="flex flex-col gap-2">
+              <a href="#" class="text-gray-600 hover:text-red-600 transition-colors">Instagram</a>
+              <a href="#" class="text-gray-600 hover:text-red-600 transition-colors">Tik Tok</a>
+              <a href="#" class="text-gray-600 hover:text-red-600 transition-colors">Facebook</a>
+            </div>
+          </div>
         </div>
-        <!-- Border -->
-        <!-- Contact Form -->
+
+        <!-- Right Column: Contact Form -->
         <form
           @submit.prevent="handleSubmit"
-          class="flex flex-col gap-6 bg-white p-12 border-brand-accent border-4 shadow-sm backdrop-blur-md"
+          class="flex flex-col gap-6 p-12 border border-brand-accent border-4 bg-warmGray-50"
         >
           <!-- Name Fields -->
           <div class="grid grid-cols-2 gap-4">
@@ -118,31 +140,43 @@ useSeoMeta({
           <div class="grid grid-cols-2 gap-4">
             <div class="flex flex-col">
               <label for="location" class="text-sm mb-2">Location*</label>
-              <select
-                id="location"
-                v-model="form.location"
-                required
-                class="px-4 py-2 border border-gray-300 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors duration-200 bg-white"
-              >
-                <option value="" disabled>Select a location</option>
-                <option v-for="location in locations" :key="location.value" :value="location.value">
-                  {{ location.label }}
-                </option>
-              </select>
+              <div class="relative inline-flex items-center w-full">
+                <Icon name="uil:location-point" class="absolute left-2 text-brand-accent w-4 h-4" />
+                <select
+                  id="location"
+                  v-model="form.location"
+                  required
+                  class="w-full bg-white pl-8 pr-8 py-1 appearance-none focus:outline-none font-medium border border-cool-gray-300 rounded-md"
+                >
+                  <option value="" disabled>Select a location</option>
+                  <option
+                    v-for="location in locations"
+                    :key="location.value"
+                    :value="location.value"
+                  >
+                    {{ location.label }}
+                  </option>
+                </select>
+                <Icon name="uil:angle-down" class="absolute right-2 w-4 h-4" />
+              </div>
             </div>
             <div class="flex flex-col">
               <label for="inquiryType" class="text-sm mb-2">Inquiry Type*</label>
-              <select
-                id="inquiryType"
-                v-model="form.inquiryType"
-                required
-                class="px-4 py-2 border border-gray-300 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors duration-200 bg-white"
-              >
-                <option value="" disabled>Select inquiry type</option>
-                <option v-for="type in inquiryTypes" :key="type.value" :value="type.value">
-                  {{ type.label }}
-                </option>
-              </select>
+              <div class="relative inline-flex items-center w-full">
+                <Icon name="uil:file-alt" class="absolute left-2 text-brand-accent w-4 h-4" />
+                <select
+                  id="inquiryType"
+                  v-model="form.inquiryType"
+                  required
+                  class="w-full bg-white pl-8 pr-8 py-1 appearance-none focus:outline-none font-medium border border-cool-gray-300 rounded-md"
+                >
+                  <option value="" disabled>Select inquiry type</option>
+                  <option v-for="type in inquiryTypes" :key="type.value" :value="type.value">
+                    {{ type.label }}
+                  </option>
+                </select>
+                <Icon name="uil:angle-down" class="absolute right-2 w-4 h-4" />
+              </div>
             </div>
           </div>
 
@@ -160,7 +194,7 @@ useSeoMeta({
 
           <button
             type="submit"
-            class="bg-red-600 text-white px-6 py-3 hover:bg-primary/90 transition-colors duration-200 mt-4"
+            class="bg-brand-primary hover:bg-red-600 text-white px-6 py-3 hover:bg-primary/90 transition-colors duration-200 mt-4"
           >
             Submit
           </button>

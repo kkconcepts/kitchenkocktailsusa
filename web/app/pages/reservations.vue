@@ -20,18 +20,22 @@ useSeoMeta({
 
 <template>
   <div :class="pageClass">
-    <section class="min-h-100vh max-w-3xl m-auto f-py-160-180">
-      <LayoutContain>
-        <div class="flex flex-col f-gap-32-48">
-          <div class="flex flex-col">
-            <h1 class="text-4xl text-center font-bold mb-10">{{ title }}</h1>
-            <p class="text-lg text-center">
-              Great food, great vibes, and great company are just around the corner. Discover our
-              growing family of restaurants and join us for a dining experience you won’t forget.
-            </p>
-          </div>
+    <LayoutContain>
+      <section class="min-h-100vh w-full f-py-160-180">
+        <div class="flex items-center justify-center flex-col w-full">
+          <h1 class="text-4xl text-center font-bold mb-10 uppercase">{{ title }}</h1>
+          <p class="text-lg text-center mb-12">
+            Great food, great vibes, and great company are just around the corner. Discover our
+            growing family of restaurants and join us for a dining experience you won't forget.
+          </p>
         </div>
-      </LayoutContain>
-    </section>
+      </section>
+    </LayoutContain>
   </div>
 </template>
+
+<style scoped>
+.section {
+  width: 100%;
+}
+</style>

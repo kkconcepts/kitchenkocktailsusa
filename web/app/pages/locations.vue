@@ -5,6 +5,7 @@ const title = 'Locations'
 const pageClass = 'page-locations'
 
 // Static location data
+// Update the locations array to include ordering URLs
 const locations = [
   {
     city: 'Chicago',
@@ -15,8 +16,9 @@ const locations = [
       fridayToSaturday: '11am - 12am',
       sunday: '11am - 11pm'
     },
-    imageUrl: '/hero-1.jpg',
-    reservationUrl: 'https://www.opentable.com/r/kitchen-and-kocktails-by-kevin-kelley-chicago'
+    imageUrl: '/hero-4.jpg',
+    reservationUrl: 'https://www.opentable.com/r/kitchen-and-kocktails-by-kevin-kelley-chicago',
+    orderUrl: 'https://order.toasttab.com/online/kitchen-kocktails-chicago-444-north-wabash-avenue'
   },
   {
     city: 'Dallas',
@@ -27,8 +29,9 @@ const locations = [
       fridayToSaturday: '11am - 12am',
       sunday: '11am - 11pm'
     },
-    imageUrl: '/hero-2.jpg',
-    reservationUrl: 'https://www.opentable.com/r/kitchen-and-kocktails-by-kevin-kelley-dallas'
+    imageUrl: '/hero-8.jpeg',
+    reservationUrl: 'https://www.opentable.com/r/kitchen-and-kocktails-by-kevin-kelley-dallas',
+    orderUrl: 'https://order.toasttab.com/online/kitchen-kocktails-dallas-1933-elm-street'
   },
   {
     city: 'Atlanta',
@@ -39,8 +42,10 @@ const locations = [
       fridayToSaturday: '11am - 12am',
       sunday: '11am - 11pm'
     },
-    imageUrl: '/hero-3.jpg',
-    reservationUrl: 'https://www.opentable.com/r/kitchen-and-kocktails-atlanta-dunwoody'
+    imageUrl: '/hero-9.jpg',
+    reservationUrl: 'https://www.opentable.com/r/kitchen-and-kocktails-atlanta-dunwoody',
+    orderUrl:
+      'https://order.toasttab.com/online/kitchen-kocktails-atlanta-4400-ashford-dunwoody-rd-suite-3030'
   },
   {
     city: 'Charlotte',
@@ -51,8 +56,10 @@ const locations = [
       fridayToSaturday: '11am - 12am',
       sunday: '11am - 11pm'
     },
-    imageUrl: '/hero-4',
-    reservationUrl: 'https://www.opentable.com/r/kitchen-and-kocktails-by-kevin-kelley-charlotte'
+    imageUrl: '/hero-6.jpg',
+    reservationUrl: 'https://www.opentable.com/r/kitchen-and-kocktails-by-kevin-kelley-charlotte',
+    orderUrl:
+      'https://order.toasttab.com/online/kitchen-kocktails-charlotte-210-e-trade-street-a104b'
   },
   {
     city: 'Washington, D.C.',
@@ -63,24 +70,25 @@ const locations = [
       fridayToSaturday: '11am - 12am',
       sunday: '11am - 11pm'
     },
-    imageUrl: '/hero-2.jpg',
+    imageUrl: '/hero-7.jpeg',
     reservationUrl:
-      'https://www.opentable.com/r/kitchen-and-kocktails-by-kevin-kelley-dc-washington'
+      'https://www.opentable.com/r/kitchen-and-kocktails-by-kevin-kelley-dc-washington',
+    orderUrl: 'https://order.toasttab.com/online/kitchen-kocktails-dc-300-i-street-nw'
   }
 ]
 
 // Default to first location
 const selectedLocation = ref(locations[0])
 
-// Function to update selected location
-const changeLocation = (location) => {
-  selectedLocation.value = location
+// Function to handle location change
+const changeLocation = (city) => {
+  selectedLocation.value = locations.find((loc) => loc.city === city)
 }
 </script>
 
 <template>
   <div :class="pageClass">
-    <section class="min-h-100vh bg-light-300 m-auto f-py-160-180">
+    <section class="min-h-100vh mx-auto f-py-160-180">
       <LayoutContain>
         <div class="flex max-w-6xl m-auto flex-col f-gap-32-48">
           <div class="flex flex-col max-w-3xl mx-auto">
@@ -93,67 +101,78 @@ const changeLocation = (location) => {
 
           <!-- Location Content -->
           <div
-            class="grid grid-cols-1 md:grid-cols-2 gap-8 bg-white p-12 shadow-sm border-brand-accent border-4"
+            class="grid grid-cols-1 md:grid-cols-2 gap-8 bg-warmGray-50 p-12 shadow-sm border-brand-accent border-4"
           >
             <!-- Left Column: Location Info -->
             <div class="space-y-8">
-              <!-- City Selector -->
-              <div class="flex items-center gap-2 mb-8">
-                <h2 class="text-2xl font-bold">{{ selectedLocation.city }}</h2>
-                <button
-                  class="text-brand-accent transition-colors duration-200"
-                  @click="
-                    () => {
-                      // Show city selector
-                      document
-                        .getElementById('city-selector')
-                        .scrollIntoView({ behavior: 'smooth' })
-                    }
-                  "
+              <!-- Location Selector Dropdown -->
+              <div class="mb-8">
+                <label for="location-select" class="block text-sm font-medium text-gray-700 mb-2"
+                  >Select Location</label
                 >
-                  change city
-                </button>
-              </div>
-
-              <!-- Address -->
-              <div class="flex items-start gap-2">
-                <Icon name="uil:map-marker" class="w-5 h-5 mt-1" />
-                <p>{{ selectedLocation.address }}</p>
-              </div>
-
-              <!-- Phone -->
-              <div class="flex items-center gap-2">
-                <Icon name="uil:phone" class="w-5 h-5" />
-                <p>{{ selectedLocation.phone }}</p>
-              </div>
-
-              <!-- Hours -->
-              <div class="space-y-2">
-                <div class="flex items-center gap-2">
-                  <Icon name="uil:clock" class="w-5 h-5" />
-                  <p class="font-semibold">Hours</p>
-                </div>
-                <div class="ml-7 space-y-1">
-                  <p>Monday - Thursday {{ selectedLocation.hours.mondayToThursday }}</p>
-                  <p>Friday - Saturday {{ selectedLocation.hours.fridayToSaturday }}</p>
-                  <p>Sunday {{ selectedLocation.hours.sunday }}</p>
+                <div class="relative inline-flex items-center">
+                  <Icon
+                    name="uil:location-point"
+                    class="absolute left-2 text-brand-accent w-4 h-4"
+                  />
+                  <select
+                    id="location-select"
+                    :value="selectedLocation.city"
+                    @change="changeLocation($event.target.value)"
+                    class="bg-white pl-8 pr-8 py-1 appearance-none focus:outline-none font-medium border border-cool-gray-300 rounded-md"
+                  >
+                    <option
+                      v-for="location in locations"
+                      :key="location.city"
+                      :value="location.city"
+                    >
+                      {{ location.city }}
+                    </option>
+                  </select>
+                  <Icon name="uil:angle-down" class="absolute right-2 text-brand-accent w-4 h-4" />
                 </div>
               </div>
 
-              <!-- Find a Table Button -->
-              <NuxtLink
-                :href="selectedLocation.reservationUrl"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-block mt-8 px-6 py-2 bg-red-600 text-white hover:bg-red-700 transition-colors duration-200"
-              >
-                Find a Table
-              </NuxtLink>
+              <!-- Location Details -->
+              <div class="space-y-4">
+                <div>
+                  <h3 class="font-semibold mb-2">Address</h3>
+                  <p>{{ selectedLocation.address }}</p>
+                </div>
+                <div>
+                  <h3 class="font-semibold mb-2">Phone</h3>
+                  <p>{{ selectedLocation.phone }}</p>
+                </div>
+                <div>
+                  <h3 class="font-semibold mb-2">Hours</h3>
+                  <p>Monday - Thursday: {{ selectedLocation.hours.mondayToThursday }}</p>
+                  <p>Friday - Saturday: {{ selectedLocation.hours.fridayToSaturday }}</p>
+                  <p>Sunday: {{ selectedLocation.hours.sunday }}</p>
+                </div>
+                <div class="pt-4 flex space-x-4">
+                  <NuxtLink
+                    :href="selectedLocation.reservationUrl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="bg-brand-accent text-light font-medium px-6 py-3 transition-colors duration-200"
+                  >
+                    Make a Reservation
+                  </NuxtLink>
+                  <NuxtLink
+                    :href="selectedLocation.orderUrl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="bg-brand-dark text-white px-6 py-3 font-medium hover:bg-brand-accent transition-colors duration-200"
+                  >
+                    Order Online
+                  </NuxtLink>
+                </div>
+              </div>
             </div>
 
             <!-- Right Column: Location Image -->
-            <div class="relative h-[400px] overflow-hidden">
-              <img
+            <div class="h-full">
+              <NuxtImg
                 :src="selectedLocation.imageUrl"
                 :alt="`${selectedLocation.city} location`"
                 class="w-full h-full object-cover"
@@ -165,3 +184,5 @@ const changeLocation = (location) => {
     </section>
   </div>
 </template>
+
+<style></style>

@@ -1,5 +1,7 @@
 <script setup>
-import { ref, watch } from 'vue'
+import { ref, onMounted } from 'vue'
+import gsap from 'gsap'
+import ScrollTrigger from 'gsap/ScrollTrigger'
 
 const isMenuOpen = ref(false)
 const isOrderingDropdownOpen = ref(false)
@@ -7,7 +9,7 @@ const isOrderingDropdownOpen = ref(false)
 const navigationLinks = [
   { path: '/menu', label: 'Our Menu' },
   { path: '/locations', label: 'Locations' },
-  { path: '/private-events', label: 'Private Events' },
+  { path: '/private-events', label: 'Private Dining' },
   { path: '/events', label: 'Events' },
   { path: '/about', label: 'About' },
   { path: '/contact', label: 'Contact' }
@@ -70,17 +72,27 @@ onUnmounted(() => {
 })
 
 // Add a computed property to check if we're on the menu page
+// Add this computed property
 const route = useRoute()
-const isMenuPage = computed(() => route.path.startsWith('/menu'))
+const isHomePage = computed(() => route.path === '/')
+
+// Add a ref for the header
+// Remove these lines since we won't need them anymore
+// const headerRef = ref(null)
+// const isHeaderDark = ref(false)
 </script>
 
 <template>
-  <header class="fixed bg-white top-0 text-white left-0 w-full z-50">
+  <header :class="['fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-brand-dark']">
     <LayoutContain>
-      <nav class="mx-auto py-2 h-18 flex items-center">
+      <nav class="mx-auto py-2 h-20 flex items-center">
         <!-- Logo -->
         <NuxtLink to="/" class="relative z-52 w-[350px]">
-          <img src="/logo-dark.png" alt="Kitchen + Cocktails" class="h-12 w-auto" />
+          <img
+            src="/logo-transparent.png"
+            alt="Kitchen + Cocktails"
+            class="h-12 w-auto transition-opacity duration-300"
+          />
         </NuxtLink>
 
         <!-- Desktop Navigation -->
@@ -90,7 +102,7 @@ const isMenuPage = computed(() => route.path.startsWith('/menu'))
               v-for="link in navigationLinks"
               :key="link.path"
               :to="link.path"
-              class="text-gray-700 hover:text-primary transition-colors duration-200 font-medium"
+              class="transition-colors duration-200 font-medium text-white hover:text-primary"
             >
               {{ link.label }}
             </NuxtLink>
@@ -102,7 +114,12 @@ const isMenuPage = computed(() => route.path.startsWith('/menu'))
           <div class="relative group">
             <button
               id="ordering-button"
-              class="bg-primary/10 text-dark px-6 py-2 rounded-full hover:bg-primary/20 transition-colors duration-200 flex items-center"
+              :class="[
+                'px-6 py-2 rounded-full transition-colors duration-200 flex items-center',
+                isHomePage && !isHeaderDark
+                  ? ' text-white'
+                  : 'bg-primary/10 text-white hover:bg-primary/20'
+              ]"
             >
               Order Online
               <Icon
@@ -114,7 +131,7 @@ const isMenuPage = computed(() => route.path.startsWith('/menu'))
             <!-- Dropdown Menu -->
             <div
               id="ordering-dropdown"
-              class="invisible group-hover:visible opacity-0 group-hover:opacity-100 absolute top-full left-0 mt-2 w-48 bg-white rounded shadow-lg z-50 transition-all duration-200"
+              class="invisible group-hover:visible opacity-0 group-hover:opacity-100 absolute top-full left-0 mt-2 w-48 bg-white rounded shadow-md z-50 transition-all duration-200"
             >
               <a
                 v-for="city in cities"
@@ -131,7 +148,7 @@ const isMenuPage = computed(() => route.path.startsWith('/menu'))
 
           <NuxtLink
             to="/reservations"
-            class="bg-red-600 text-white px-6 py-2 hover:bg-red-700 transition-colors duration-200"
+            class="border-brand-accent border-3 text-white px-5.5 py-1.75 hover:bg-brand-accent transition-colors duration-200"
           >
             Reserve a table
           </NuxtLink>
@@ -213,8 +230,12 @@ const isMenuPage = computed(() => route.path.startsWith('/menu'))
     </LayoutContain>
 
     <!-- Menu Categories Bar (removed v-if condition) -->
-    <div class="bg-warmGray-50 border-b border-t border-warm-gray-200">
+    <div class="bg-white">
       <slot name="menu-categories"></slot>
     </div>
   </header>
 </template>
+
+<style>
+/* Remove the .scrolled class as we're using GSAP for animations */
+</style>

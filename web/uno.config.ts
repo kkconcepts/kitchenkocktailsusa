@@ -14,11 +14,11 @@ import { presetFluid } from 'unocss-preset-fluid'
 export default defineConfig({
   theme: {
     colors: {
-      brandPrimary: '#d52020',
-      brandSecondary: '#26ace2',
-      brandAccent: '#e2a368',
-      brandLight: '#f5f4f2',
-      brandDark: '#1b1d21',
+      brandPrimary: '#C72222',
+      brandSecondary: '#26ACE2',
+      brandAccent: '#AF905C',
+      brandLight: 'rgb(224, 223, 222)',
+      brandDark: '#20232A',
       brandText: '#2E2E30'
     }
   },
