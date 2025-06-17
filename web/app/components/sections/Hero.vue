@@ -3,8 +3,10 @@ import { ref, onMounted } from 'vue'
 
 const slides = ref([
   { src: '/hero-1.jpg', alt: 'Kitchen + Kocktails Experience' },
-  { src: '/hero-2.jpg', alt: 'Signature Dishes' },
-  { src: '/hero-3.jpg', alt: 'Cocktail Selection' }
+  { src: '/hero-2.jpg', alt: 'Kitchen + Kocktails Experience' },
+  { src: '/hero-3.jpg', alt: 'Kitchen + Kocktails Experience' },
+  { src: '/hero-4.jpg', alt: 'Kitchen + Kocktails Experience' },
+  { src: '/hero-6.jpg', alt: 'Kitchen + Kocktails Experience' }
 ])
 
 const currentSlide = ref(0)

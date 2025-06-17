@@ -13,7 +13,7 @@ const { data: featuredDishes } = await useSanityQuery(groq`
 </script>
 
 <template>
-  <div class="featured-section bg-brand-accent py-24">
+  <div class="featured-section py-24">
     <div class="container mx-auto px-4">
       <!-- Header with decorative elements -->
       <div class="text-center mb-16">

@@ -1,7 +1,5 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import gsap from 'gsap'
-import ScrollTrigger from 'gsap/ScrollTrigger'
 
 const isMenuOpen = ref(false)
 const isOrderingDropdownOpen = ref(false)
@@ -9,10 +7,9 @@ const isOrderingDropdownOpen = ref(false)
 const navigationLinks = [
   { path: '/menu', label: 'Our Menu' },
   { path: '/locations', label: 'Locations' },
-  { path: '/private-events', label: 'Private Dining' },
-  { path: '/events', label: 'Events' },
   { path: '/about', label: 'About' },
-  { path: '/contact', label: 'Contact' }
+  { path: '/private-events', label: 'Private Events' },
+  { path: '/reservations', label: 'Reservations' }
 ]
 
 const cities = [
@@ -83,9 +80,13 @@ const isHomePage = computed(() => route.path === '/')
 </script>
 
 <template>
-  <header :class="['fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-brand-dark']">
-    <LayoutContain>
-      <nav class="mx-auto py-2 h-20 flex items-center">
+  <header
+    :class="[
+      'fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-brand-dark text-white bg-brand-body shadow-sm'
+    ]"
+  >
+    <LayoutContainAlt>
+      <nav class="mx-auto py-2 h-20 flex items-center mr-auto">
         <!-- Logo -->
         <NuxtLink to="/" class="relative z-52 w-[350px]">
           <img
@@ -102,7 +103,7 @@ const isHomePage = computed(() => route.path === '/')
               v-for="link in navigationLinks"
               :key="link.path"
               :to="link.path"
-              class="transition-colors duration-200 font-medium text-white hover:text-primary"
+              class="transition-colors text-md duration-200 font-semibold hover:text-primary"
             >
               {{ link.label }}
             </NuxtLink>
@@ -110,23 +111,9 @@ const isHomePage = computed(() => route.path === '/')
         </div>
 
         <!-- Action Buttons -->
-        <div class="hidden lg:flex items-center space-x-1 w-[350px] justify-end">
-          <div class="relative group">
-            <button
-              id="ordering-button"
-              :class="[
-                'px-6 py-2 rounded-full transition-colors duration-200 flex items-center',
-                isHomePage && !isHeaderDark
-                  ? ' text-white'
-                  : 'bg-primary/10 text-white hover:bg-primary/20'
-              ]"
-            >
-              Order Online
-              <Icon
-                name="uil:angle-down"
-                class="ml-1 w-5 h-5 transition-transform duration-200 group-hover:rotate-180"
-              />
-            </button>
+        <div class="lg:flex items-center space-x-1 w-[350px] justify-end">
+          <div class="relative group hidden">
+            <!-- Location -->
 
             <!-- Dropdown Menu -->
             <div
@@ -148,7 +135,7 @@ const isHomePage = computed(() => route.path === '/')
 
           <NuxtLink
             to="/reservations"
-            class="border-brand-accent border-3 text-white px-5.5 py-1.75 hover:bg-brand-accent transition-colors duration-200"
+            class="border-3 hidden text-brand-light px-5.5 py-2 tracking-wide uppercase text-sm font-bold hover:text-brand-light transition-colors duration-200"
           >
             Reserve a table
           </NuxtLink>
@@ -162,15 +149,15 @@ const isHomePage = computed(() => route.path === '/')
         >
           <div class="w-6 h-4 flex flex-col justify-between">
             <span
-              class="w-full h-0.5 bg-gray-800 transition-all duration-200 origin-center"
+              class="w-full h-0.5 bg-white transition-all duration-200 origin-center"
               :class="{ 'rotate-45 translate-y-[7px]': isMenuOpen }"
             />
             <span
-              class="w-full h-0.5 bg-gray-800 transition-opacity duration-200"
+              class="w-full h-0.5 bg-white transition-opacity duration-200"
               :class="{ 'opacity-0': isMenuOpen }"
             />
             <span
-              class="w-full h-0.5 bg-gray-800 transition-all duration-200 origin-center"
+              class="w-full h-0.5 bg-white transition-all duration-200 origin-center"
               :class="{ '-rotate-45 -translate-y-[7px]': isMenuOpen }"
             />
           </div>
@@ -178,7 +165,7 @@ const isHomePage = computed(() => route.path === '/')
 
         <!-- Mobile Menu -->
         <div
-          class="lg:hidden fixed inset-0 bg-white/85 backdrop-blur-md z-40 transition-opacity duration-300"
+          class="lg:hidden fixed inset-0 bg-brand-dark backdrop-blur-md z-40 transition-opacity duration-300"
           :class="{ 'opacity-100': isMenuOpen, 'opacity-0 pointer-events-none': !isMenuOpen }"
         >
           <div class="container mx-auto px-4 pt-32 flex flex-col items-center space-y-6">
@@ -186,7 +173,7 @@ const isHomePage = computed(() => route.path === '/')
               v-for="link in navigationLinks"
               :key="link.path"
               :to="link.path"
-              class="text-xl text-gray-800 hover:text-primary transition-colors duration-200"
+              class="text-xl text-white hover:text-primary transition-colors duration-200"
               @click="isMenuOpen = false"
             >
               {{ link.label }}
@@ -196,14 +183,7 @@ const isHomePage = computed(() => route.path === '/')
             <div class="flex flex-col space-y-4 w-full max-w-xs mt-4">
               <NuxtLink
                 to="/reservations"
-                class="bg-primary/10 text-primary px-8 py-3 hover:bg-primary/20 transition-colors duration-200 text-xl text-center"
-                @click="isMenuOpen = false"
-              >
-                Order Online
-              </NuxtLink>
-              <NuxtLink
-                to="/reservations"
-                class="bg-red-600 text-white px-8 py-3 hover:bg-red-700 transition-colors duration-200 text-xl text-center"
+                class="bg-brand-accent text-white px-8 py-3 hover:bg-brand-accent/90 transition-colors duration-200 text-xl text-center"
                 @click="isMenuOpen = false"
               >
                 Reservations
@@ -227,7 +207,7 @@ const isHomePage = computed(() => route.path === '/')
           </div>
         </div>
       </nav>
-    </LayoutContain>
+    </LayoutContainAlt>
 
     <!-- Menu Categories Bar (removed v-if condition) -->
     <div class="bg-white">

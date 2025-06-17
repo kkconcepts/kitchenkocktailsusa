@@ -6,12 +6,6 @@ const links = [
   { name: 'menu', path: '/menu', label: 'Our Menu' },
   { name: 'locations', path: '/locations', label: 'Locations' },
   { name: 'private events', path: '/private-events', label: 'Private Events' },
-  { name: 'reservations', path: '/reservations', label: 'Reservations' },
-  {
-    name: 'Order Online',
-    path: 'https://order.toasttab.com/online/kitchen-kocktails-dallas-1933-elm-street',
-    label: 'Order Online'
-  },
   { name: 'contact', path: '/contact', label: 'Contact' }
 ]
 
@@ -19,7 +13,7 @@ const lowerLinks = [
   { name: 'privacy policy', path: '/privacy-policy', label: 'Privacy Policy' },
   { name: 'terms of service', path: '/terms-of-service', label: 'Terms of Service' },
   { name: 'cookie policy', path: '/cookie-policy', label: 'Cookie Policy' },
-  { name: 'careers', path: '/careers', label: 'Careers' }
+  { name: 'faq', path: '/faq', label: 'FAQ' }
 ]
 
 const cities = [
@@ -119,7 +113,7 @@ function selectCity(city) {
 </script>
 
 <template>
-  <div class="footer bg-white">
+  <div class="footer text-warmGray-800">
     <div class="app-footer-top f-pt-24-48 f-mb-64-72">
       <nav>
         <div class="logo w-45 m-auto mb-12">
@@ -255,7 +249,7 @@ function selectCity(city) {
         </div>
       </div>
     </div>
-    <div class="app-footer border-brand-accent border-t-4">
+    <div class="app-footer border-brand-accent border-t-4 bg-brand-dark">
       <div class="app-footer-inner pt-35 f-gap-24-48 min-h-65vh md:min-h-35vh">
         <div class="app-footer-btm flex flex-col h-full f-gap-4-8 text-center px-4 md:px-0">
           <nav class="w-full md:overflow-visible">
@@ -284,7 +278,6 @@ function selectCity(city) {
   position: relative;
   width: 100%;
   z-index: 1;
-  background-color: #1b1d21;
   color: #fff;
 }
 

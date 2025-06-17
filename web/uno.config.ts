@@ -17,9 +17,16 @@ export default defineConfig({
       brandPrimary: '#C72222',
       brandSecondary: '#26ACE2',
       brandAccent: '#AF905C',
-      brandLight: 'rgb(224, 223, 222)',
-      brandDark: '#20232A',
-      brandText: '#2E2E30'
+      brandLight: 'rgb(239, 229, 212)',
+      brandLightAccent: '#F4EAD3',
+      brandDark: 'rgb(22, 22, 24)',
+      brandText: '#2E2E30',
+      brandStroke: 'rgb(183, 159, 105)',
+      brandBody: 'rgb(222, 213, 202)'
+    },
+    fontFamily: {
+      'gt-ultra': ['GT Ultra Fine', 'sans-serif'],
+      'gt-pantheon': ['GT Pantheon Text', 'sans-serif']
     }
   },
   shortcuts: [

@@ -49,13 +49,13 @@ useSeoMeta({
 </script>
 
 <template>
-  <div :class="pageClass">
+  <div :class="pageClass" class="bg-brand-light">
     <section class="container mx-auto f-py-160-180">
       <div class="grid grid-cols-2 gap-16">
         <!-- Left Column: Contact Info -->
         <div class="flex flex-col gap-12">
           <div class="max-w-340px">
-            <h1 class="text-4xl font-bold mb-6">CONTACT US</h1>
+            <h1 class="text-4xl font-gt-ultra tracking-wide mb-6">CONTACT US</h1>
             <p class="text-gray-600">
               Have questions, feedback, or event inquiries? Reach out to our team and we'll be in
               touch.
@@ -63,8 +63,8 @@ useSeoMeta({
           </div>
 
           <div>
-            <h2 class="text-2xl font-bold mb-4">EMAIL</h2>
-            <p>General Inquiries:</p>
+            <h2 class="text-2xl font-gt-ultra tracking-wide mb-4">EMAIL</h2>
+            <p class="">General Inquiries:</p>
             <a
               href="mailto:info@kitchenkocktailsusa.com"
               class="text-gray-600 hover:text-red-600 transition-colors"
@@ -74,11 +74,11 @@ useSeoMeta({
           </div>
 
           <div>
-            <h2 class="text-2xl font-bold mb-4">SOCIALS</h2>
+            <h2 class="text-2xl font-gt-ultra tracking-wide mb-4">SOCIALS</h2>
             <div class="flex flex-col gap-2">
-              <a href="#" class="text-gray-600 hover:text-red-600 transition-colors">Instagram</a>
-              <a href="#" class="text-gray-600 hover:text-red-600 transition-colors">Tik Tok</a>
-              <a href="#" class="text-gray-600 hover:text-red-600 transition-colors">Facebook</a>
+              <a href="#" class="text-gray-600 transition-colors">Instagram</a>
+              <a href="#" class="text-gray-600 transition-colors">Tik Tok</a>
+              <a href="#" class="text-gray-600 transition-colors">Facebook</a>
             </div>
           </div>
         </div>
@@ -146,7 +146,7 @@ useSeoMeta({
                   id="location"
                   v-model="form.location"
                   required
-                  class="w-full bg-white pl-8 pr-8 py-1 appearance-none focus:outline-none font-medium border border-cool-gray-300 rounded-md"
+                  class="w-full bg-white pl-8 pr-8 py-1 appearance-none focus:outline-none font-medium border border-cool-gray-300"
                 >
                   <option value="" disabled>Select a location</option>
                   <option
@@ -168,7 +168,7 @@ useSeoMeta({
                   id="inquiryType"
                   v-model="form.inquiryType"
                   required
-                  class="w-full bg-white pl-8 pr-8 py-1 appearance-none focus:outline-none font-medium border border-cool-gray-300 rounded-md"
+                  class="w-full bg-white pl-8 pr-8 py-1 appearance-none focus:outline-none font-medium border border-cool-gray-300"
                 >
                   <option value="" disabled>Select inquiry type</option>
                   <option v-for="type in inquiryTypes" :key="type.value" :value="type.value">
@@ -194,7 +194,7 @@ useSeoMeta({
 
           <button
             type="submit"
-            class="bg-brand-primary hover:bg-red-600 text-white px-6 py-3 hover:bg-primary/90 transition-colors duration-200 mt-4"
+            class="bg-brand-dark hover:bg-brand-dark/90 text-white px-6 py-3 transition-colors duration-200 mt-4"
           >
             Submit
           </button>

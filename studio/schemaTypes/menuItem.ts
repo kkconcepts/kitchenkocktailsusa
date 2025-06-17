@@ -22,6 +22,40 @@ export default {
       type: 'number',
     },
     {
+      name: 'addOns',
+      title: 'Add Ons',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            {
+              name: 'name',
+              title: 'Add On Name',
+              type: 'string',
+            },
+            {
+              name: 'price',
+              title: 'Additional Price',
+              type: 'number',
+              validation: (Rule: import('sanity').Rule) => Rule.min(0),
+            },
+            {
+              name: 'description',
+              title: 'Description',
+              type: 'string',
+            },
+            {
+              name: 'isAvailable',
+              title: 'Is Available',
+              type: 'boolean',
+              initialValue: true,
+            },
+          ],
+        },
+      ],
+    },
+    {
       name: 'productType',
       title: 'Product Type',
       type: 'string',
@@ -35,8 +69,12 @@ export default {
           {title: 'Premium Sides', value: 'premium-sides'},
           {title: 'Brunch', value: 'brunch'},
           {title: 'Brunch Sides', value: 'brunch-sides'},
+          {title: 'Lunch', value: 'lunch'},
+          {title: 'Waffles', value: 'waffles'},
           {title: 'Desserts', value: 'desserts'},
-          {title: 'Cocktails', value: 'cocktails'},
+          {title: 'Kocktails', value: 'kocktails'},
+          {title: 'Frozens', value: 'frozens'},
+          {title: 'To-Go Frozens', value: 'to-go-frozens'}, // correct
         ],
       },
     },
@@ -100,6 +138,24 @@ export default {
         source: 'name',
         maxLength: 96,
       },
+    },
+    {
+      name: 'featured',
+      title: 'Featured Item',
+      type: 'boolean',
+      description: 'Set this to true to display this item in the featured section on the homepage',
+    },
+    {
+      name: 'featuredCategory',
+      title: 'Featured Category',
+      type: 'string',
+      options: {
+        list: [
+          {title: 'Kitchen', value: 'kitchen'},
+          {title: 'Kocktails', value: 'kocktails'},
+        ],
+      },
+      hidden: ({document}: {document: {featured?: boolean}}) => !document?.featured,
     },
   ],
 }

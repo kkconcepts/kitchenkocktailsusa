@@ -14,9 +14,10 @@ useSeoMeta({
 <template>
   <div id="__layout">
     <AppHeader />
-    <main id="main" role="main bg-brand-light">
+    <main id="main" role="main">
       <NuxtLayout>
         <NuxtPage />
+        <ModulesPrivateCTA />
         <AppFooter />
       </NuxtLayout>
     </main>

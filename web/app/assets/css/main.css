@@ -10,6 +10,14 @@
   --color-selection-text: #181818;
 }
 
+@font-face {
+  font-family: 'GT Ultra Fine';
+  src: url('/GT-Ultra-Fine-Regular-Trial.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 [data-theme='dark'] {
   --background-color: #000000;
   --text-color: #ffffff;
