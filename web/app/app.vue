@@ -1,5 +1,34 @@
 <script setup>
-import { appName, appDescription, ogImage } from './constants'
+import { appName, appDescription, ogImage } from '~/constants'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { ScrollSmoother } from 'gsap/ScrollSmoother'
+
+gsap.registerPlugin(ScrollTrigger, ScrollSmoother)
+
+let smoother = ref(null)
+
+onMounted(() => {
+  if (process.client) {
+    gsap.registerPlugin(ScrollTrigger, ScrollSmoother)
+
+    smoother.value = ScrollSmoother.create({
+      wrapper: '#page-wrapper',
+      content: '#page-content',
+      smooth: 1.4,
+      speed: 1,
+      effects: true
+    })
+  }
+})
+
+onUnmounted(() => {
+  if (smoother.value) {
+    smoother.value.kill()
+  }
+})
+
+const route = useRoute()
 
 useSeoMeta({
   title: appName,
@@ -14,13 +43,17 @@ useSeoMeta({
 <template>
   <div id="__layout">
     <AppHeader />
-    <main id="main" role="main">
-      <NuxtLayout>
-        <NuxtPage />
-        <ModulesPrivateCTA />
-        <AppFooter />
-      </NuxtLayout>
-    </main>
+    <div :class="['page', 'page-' + route.name]">
+      <div id="page-wrapper" class="page-wrapper">
+        <div id="page-content" class="page-content">
+          <main role="main" class="main">
+            <NuxtPage />
+            <SectionsCateringCTA />
+            <AppFooter />
+          </main>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -32,20 +65,11 @@ useSeoMeta({
 
 #main {
   display: block;
-  unicode-bidi: isolate;
-}
-
-.page-enter-active,
-.page-leave-active {
-  transition: all 0.25s;
-}
-.page-enter-from,
-.page-leave-to {
-  opacity: 0;
-  filter: blur(0.5rem);
+  position: relative;
 }
 
 .page {
   min-height: 100vh;
+  width: 100%;
 }
 </style>

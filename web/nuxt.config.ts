@@ -17,15 +17,32 @@ export default defineNuxtConfig({
     host: '0.0.0.0',
     port: 3000
   },
-  modules: [
-    '@unocss/nuxt',
-    '@nuxt/image',
-    '@nuxt/icon',
-    '@nuxtjs/seo',
-    '@nuxtjs/sanity',
-    '@nuxtjs/leaflet',
-    'nuxt-mapbox'
-  ],
+  modules: ['@unocss/nuxt', '@nuxt/image', '@nuxt/icon', '@nuxtjs/seo', '@nuxtjs/sanity'],
+  image: {
+    quality: 80,
+    format: ['webp'],
+    screens: {
+      xs: 320,
+      sm: 640,
+      md: 768,
+      lg: 1024,
+      xl: 1280,
+      xxl: 1536
+    },
+    preload: true,
+    domains: ['kitchenkocktailsusa.com'],
+    provider: 'ipx',
+    ipx: {
+      modifiers: {
+        format: 'webp',
+        quality: '80',
+        progressive: true
+      }
+    }
+  },
+  build: {
+    transpile: ['gsap']
+  },
   site: {
     name: 'Kitchen + Kocktails USA',
     url: 'https://kitchenkocktailsusa.com',
@@ -36,23 +53,23 @@ export default defineNuxtConfig({
     language: 'en',
     trailingSlash: false
   },
-  robots: {
-    config: {
-      UserAgent: '*',
-      Disallow: ''
-    }
-  },
+  plugins: [{ src: '~/plugins/gsap.client.ts' }],
   sanity: {
     projectId: process.env.SANITY_PROJECT_ID,
     dataset: process.env.SANITY_DATASET,
     apiVersion: '2024-01-01',
-    useCdn: false
+    useCdn: true
   },
-  mapbox: {
-    accessToken: process.env.MAPBOX_API_TOKEN
+  runtimeConfig: {
+    RESEND_API_KEY: process.env.RESEND_API_KEY,
+    mailchimp: {
+      apiKey: process.env.MAILCHIMP_API_KEY,
+      server: process.env.MAILCHIMP_SERVER,
+      listID: process.env.MAILCHIMP_LIST_ID
+    }
   },
   app: {
-    pageTransition: { name: 'page', mode: 'out-in' },
+    pageTransition: { name: 'page-transition', mode: 'out-in' },
     head: {
       meta: [
         { charset: 'utf-8' },

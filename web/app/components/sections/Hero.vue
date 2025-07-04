@@ -1,13 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 
-const slides = ref([
-  { src: '/hero-1.jpg', alt: 'Kitchen + Kocktails Experience' },
-  { src: '/hero-2.jpg', alt: 'Kitchen + Kocktails Experience' },
-  { src: '/hero-3.jpg', alt: 'Kitchen + Kocktails Experience' },
-  { src: '/hero-4.jpg', alt: 'Kitchen + Kocktails Experience' },
-  { src: '/hero-6.jpg', alt: 'Kitchen + Kocktails Experience' }
-])
+const slides = ref([{ src: '/hero-2.jpg', alt: 'Kitchen + Kocktails Experience' }])
 
 const currentSlide = ref(0)
 const isTransitioning = ref(false)
@@ -38,14 +32,14 @@ onMounted(() => {
 
 <template>
   <div class="hero bg-brand-dark relative">
-    <div class="slider-container">
+    <div class="slider-container hero-fade-in">
       <div
         v-for="(slide, index) in slides"
         :key="slide.src"
         class="slide"
         :class="{ active: index === currentSlide }"
       >
-        <NuxtImg :src="slide.src" :alt="slide.alt" class="slide-image" loading="eager" />
+        <NuxtImg :src="slide.src" :alt="slide.alt" class="slide-image" preload />
       </div>
 
       <!-- Navigation Arrows -->
@@ -70,21 +64,21 @@ onMounted(() => {
       </div>
     </div>
 
-    <div
-      class="hidden absolute bottom-0 left-0 right-0 p-4 bg-dark-400/95 backdrop-blur-sm text-white"
-    >
-      <div class="grid grid-cols-2 f-gap-16-24">
-        <NuxtLink
-          to="/menu"
-          class="bg-red-600 hover:bg-red-700 transition-colors duration-200 flex items-center justify-center h-10"
-          >Our Menu</NuxtLink
-        >
-        <NuxtLink
-          to="/reservations"
-          class="bg-red-600 hover:bg-red-700 transition-colors duration-200 flex items-center justify-center h-10"
-          >Reservations</NuxtLink
-        >
-      </div>
+    <div class="absolute bottom-0 left-0 right-0 f-py-8-12 text-white">
+      <LayoutContain>
+        <div class="flex flex-col justify-start items-start w-full stagger-fade-in">
+          <p
+            class="f-text-11-12 mb-2 text-start tracking-0.75 font-semibold uppercase text-brand-accent"
+          >
+            KITCHEN + KOCKTAILS
+          </p>
+          <h1
+            class="f-text-28-56 leading-tight tracking-0.25 font-gt-ultra font-medium text-start uppercase mb-4"
+          >
+            Welcome Home
+          </h1>
+        </div>
+      </LayoutContain>
     </div>
   </div>
 </template>
@@ -175,5 +169,34 @@ onMounted(() => {
 
 .indicator.active {
   background: white;
+}
+
+.stagger-container > * {
+  opacity: 0;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.slide::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: linear-gradient(to bottom, rgba(13, 13, 16, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
+  pointer-events: none;
+}
+
+.slide.active {
+  opacity: 1;
 }
 </style>

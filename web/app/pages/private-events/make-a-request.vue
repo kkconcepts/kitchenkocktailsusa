@@ -319,6 +319,7 @@
             v-if="currentStep > 1"
             @click="previousStep"
             class="px-6 py-2 border border-gray-300 text-gray-700 hover:bg-gray-50"
+            aria-label="Navigation back button"
           >
             Back
           </button>
@@ -326,6 +327,7 @@
             v-else
             @click="cancel"
             class="px-6 py-2 border border-gray-300 text-gray-700 hover:bg-gray-50"
+            aria-label="Navigation cancel button"
           >
             Cancel
           </button>
@@ -334,6 +336,7 @@
             @click="nextStep"
             class="px-6 py-2 bg-brand-accent text-white hover:bg-brand-accent/90"
             :disabled="!isStepValid"
+            aria-label="Navigation next button"
           >
             Continue
           </button>
@@ -341,6 +344,7 @@
             v-else
             @click="submitForm"
             class="px-6 py-2 bg-brand-accent text-white hover:bg-brand-accent/90"
+            aria-label="Navigation submit button"
           >
             Submit Request
           </button>

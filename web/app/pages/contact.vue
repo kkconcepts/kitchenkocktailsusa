@@ -33,9 +33,37 @@ const inquiryTypes = [
   { value: 'other', label: 'Other' }
 ]
 
-const handleSubmit = () => {
-  // Handle form submission here
-  console.log('Form submitted:', form.value)
+const handleSubmit = async () => {
+  try {
+    const { data, error } = await useFetch('/api/contact', {
+      method: 'POST',
+      body: form.value
+    })
+
+    if (error.value) {
+      console.error('Submission failed:', error.value)
+      alert('Something went wrong. Please try again later.')
+      return
+    }
+
+    if (data.value?.success) {
+      alert('Message sent! We’ll get back to you soon.')
+      form.value = {
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        location: '',
+        inquiryType: '',
+        message: ''
+      }
+    } else {
+      alert('There was an issue sending your message.')
+    }
+  } catch (err) {
+    console.error('Unexpected error:', err)
+    alert('Could not send. Please try again.')
+  }
 }
 
 useSeoMeta({
@@ -49,14 +77,17 @@ useSeoMeta({
 </script>
 
 <template>
-  <div :class="pageClass" class="bg-brand-light">
-    <section class="container mx-auto f-py-160-180">
+  <div :class="pageClass" class="">
+    <section class="section">
+      <SectionsHeroPage title="Contact" image="/hero-2.jpg" />
+    </section>
+    <section class="max-w-90rem mx-auto f-py-160-180">
       <div class="grid grid-cols-2 gap-16">
         <!-- Left Column: Contact Info -->
         <div class="flex flex-col gap-12">
           <div class="max-w-340px">
-            <h1 class="text-4xl font-gt-ultra tracking-wide mb-6">CONTACT US</h1>
-            <p class="text-gray-600">
+            <h1 class="text-4xl font-gt-ultra tracking-wide mb-6 uppercase">Get in touch</h1>
+            <p class="">
               Have questions, feedback, or event inquiries? Reach out to our team and we'll be in
               touch.
             </p>
@@ -67,27 +98,48 @@ useSeoMeta({
             <p class="">General Inquiries:</p>
             <a
               href="mailto:info@kitchenkocktailsusa.com"
-              class="text-gray-600 hover:text-red-600 transition-colors"
+              class="hover:opacity-60 transition-opacity duration-300 ease-in-out"
             >
               info@kitchenkocktailsusa.com
             </a>
           </div>
 
           <div>
-            <h2 class="text-2xl font-gt-ultra tracking-wide mb-4">SOCIALS</h2>
-            <div class="flex flex-col gap-2">
-              <a href="#" class="text-gray-600 transition-colors">Instagram</a>
-              <a href="#" class="text-gray-600 transition-colors">Tik Tok</a>
-              <a href="#" class="text-gray-600 transition-colors">Facebook</a>
+            <h2 class="text-2xl font-gt-ultra tracking-wide mb-6">SOCIALS</h2>
+            <div class="social-links flex space-x-4 f-text-16-18">
+              <NuxtLink
+                to="https://www.facebook.com/share/193vpd2MN7/?mibextid=wwXIfr"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Visit Kitchen + Kocktails on Facebook"
+                class="hover:opacity-60 transition-opacity duration-300 ease-in-out"
+              >
+                <Icon name="uil:facebook-f" />
+              </NuxtLink>
+              <NuxtLink
+                to="https://www.tiktok.com/@kitchenkocktailsofficial"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Visit Kitchen + Kocktails on Facebook"
+                class="hover:opacity-60 transition-opacity duration-300 ease-in-out"
+              >
+                <Icon name="ic:baseline-tiktok" />
+              </NuxtLink>
+              <NuxtLink
+                to="https://www.instagram.com/kitchenkocktailsusa/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Visit Kitchen + Kocktails on Facebook"
+                class="hover:opacity-60 transition-opacity duration-300 ease-in-out"
+              >
+                <Icon name="uil:instagram" />
+              </NuxtLink>
             </div>
           </div>
         </div>
 
         <!-- Right Column: Contact Form -->
-        <form
-          @submit.prevent="handleSubmit"
-          class="flex flex-col gap-6 p-12 border border-brand-accent border-4 bg-warmGray-50"
-        >
+        <form @submit.prevent="handleSubmit" class="flex flex-col gap-6 px-12">
           <!-- Name Fields -->
           <div class="grid grid-cols-2 gap-4">
             <div class="flex flex-col">
@@ -97,7 +149,7 @@ useSeoMeta({
                 v-model="form.firstName"
                 type="text"
                 required
-                class="px-4 py-2 border border-gray-300 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors duration-200"
+                class="px-4 py-2 rounded-0.5 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors duration-200"
               />
             </div>
             <div class="flex flex-col">
@@ -107,7 +159,7 @@ useSeoMeta({
                 v-model="form.lastName"
                 type="text"
                 required
-                class="px-4 py-2 border border-gray-300 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors duration-200"
+                class="px-4 py-2 rounded-0.5 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors duration-200"
               />
             </div>
           </div>
@@ -121,7 +173,7 @@ useSeoMeta({
                 v-model="form.email"
                 type="email"
                 required
-                class="px-4 py-2 border border-gray-300 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors duration-200"
+                class="px-4 py-2 rounded-0.5 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors duration-200"
               />
             </div>
             <div class="flex flex-col">
@@ -131,7 +183,7 @@ useSeoMeta({
                 v-model="form.phone"
                 type="tel"
                 required
-                class="px-4 py-2 border border-gray-300 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors duration-200"
+                class="px-4 py-2 rounded-0.5 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors duration-200"
               />
             </div>
           </div>
@@ -146,7 +198,7 @@ useSeoMeta({
                   id="location"
                   v-model="form.location"
                   required
-                  class="w-full bg-white pl-8 pr-8 py-1 appearance-none focus:outline-none font-medium border border-cool-gray-300"
+                  class="w-full rounded-0.5 pl-8 pr-8 py-2.5 appearance-none focus:outline-none font-regular text-sm"
                 >
                   <option value="" disabled>Select a location</option>
                   <option
@@ -168,7 +220,7 @@ useSeoMeta({
                   id="inquiryType"
                   v-model="form.inquiryType"
                   required
-                  class="w-full bg-white pl-8 pr-8 py-1 appearance-none focus:outline-none font-medium border border-cool-gray-300"
+                  class="w-full pl-8 rounded-0.5 pr-8 py-2.5 appearance-none focus:outline-none font-regular text-sm"
                 >
                   <option value="" disabled>Select inquiry type</option>
                   <option v-for="type in inquiryTypes" :key="type.value" :value="type.value">
@@ -188,13 +240,14 @@ useSeoMeta({
               v-model="form.message"
               required
               rows="4"
-              class="px-4 py-2 border border-gray-300 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors duration-200"
+              class="px-4 py-2.5 rounded-0.5 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors duration-200"
             ></textarea>
           </div>
 
           <button
             type="submit"
-            class="bg-brand-dark hover:bg-brand-dark/90 text-white px-6 py-3 transition-colors duration-200 mt-4"
+            class="f-text-12-13 font-semibold uppercase rounded-0.5 bg-brand-accent border border-brand-accent text-white hover:bg-brand-accent/90 f-py-6-8 f-px-24-32 tracking-wider hover:ease-in-out transition-colors duration-300"
+            aria-label="Submit Contact Form"
           >
             Submit
           </button>

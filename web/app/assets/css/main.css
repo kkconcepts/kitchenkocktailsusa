@@ -8,11 +8,12 @@
   --color-hover: #6a6a6a;
   --color-border: #275dc5;
   --color-selection-text: #181818;
+  --background-color: #f2f0ed;
 }
 
 @font-face {
   font-family: 'GT Ultra Fine';
-  src: url('/GT-Ultra-Fine-Regular-Trial.woff2') format('woff2');
+  src: url('/GT-Ultra-Median-Regular-Trial.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -36,7 +37,6 @@
 
 div {
   display: block;
-  unicode-bidi: isolate;
 }
 
 body {
@@ -48,7 +48,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   margin: 0;
   padding: 0;
-  color: var(--color-text);
+  background-color: var(--background-color);
+  scroll-behavior: auto !important;
 }
 
 a:hover {
@@ -84,4 +85,14 @@ select:focus {
   border-color: var(--color-border);
   outline: none;
   box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+.page-transition-enter-active,
+.page-transition-leave-active {
+  transition: opacity 0.6s cubic-bezier(0.55, 0, 0.1, 1);
+  blur: 20px;
+}
+.page-transition-enter-from,
+.page-transition-leave-to {
+  opacity: 0;
 }

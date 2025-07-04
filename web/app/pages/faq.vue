@@ -89,13 +89,13 @@ const toggleFaq = (index) => {
 </script>
 
 <template>
-  <div class="bg-brand-body" :class="pageClass">
+  <div class="bg-zinc-900/95" :class="pageClass">
     <section class="min-h-100vh max-w-3xl m-auto f-py-160-180">
       <LayoutContain class="">
         <div class="flex flex-col f-gap-32-48 bg-white p-12 border-3 border-brand-accent">
-          <div class="flex flex-col">
-            <h1 class="text-4xl text-center font-bold mb-10">{{ title }}</h1>
-            <p class="text-lg text-center">
+          <div class="flex flex-col w-full justify-start items-center">
+            <h1 class="text-4xl font-gt-ultra text-center mb-10">{{ title }}</h1>
+            <p class="f-text-15-17 font-light max-w-lg text-center leading-tight">
               Find answers to commonly asked questions about dining at Kitchen + Kocktails. From
               dress code and reservations to our policies and services, we're here to help make your
               dining experience exceptional.
@@ -103,7 +103,7 @@ const toggleFaq = (index) => {
           </div>
 
           <!-- FAQ Accordion -->
-          <div class="space-y-4">
+          <div class="space-y-5">
             <div
               v-for="(faq, index) in faqs"
               :key="index"
@@ -111,14 +111,15 @@ const toggleFaq = (index) => {
             >
               <button
                 @click="toggleFaq(index)"
-                class="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-brand-light-accent transition-colors"
+                class="group w-full px-6 py-4 text-left flex justify-between items-center hover:bg-brand-accent hover:text-white duration-300 transition-colors"
+                aria-label="Toggle FAQ Question"
               >
-                <span class="font-medium text-lg">{{ faq.question }}</span>
+                <span class="font-regular f-text-15-17">{{ faq.question }}</span>
                 <Icon
                   :name="faq.isOpen ? 'uil:angle-up' : 'uil:angle-down'"
                   :class="[
                     'w-6 h-6 transition-transform',
-                    faq.isOpen ? 'text-[#e2a368]' : 'text-gray-500'
+                    faq.isOpen ? 'text-white' : 'text-gray-500 group-hover:text-white'
                   ]"
                 />
               </button>

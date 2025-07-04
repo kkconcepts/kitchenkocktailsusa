@@ -1,221 +1,168 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, watch, onMounted, nextTick, computed } from 'vue'
+import { useRoute } from 'vue-router'
+import { gsap } from 'gsap'
 
+const { $gsap, $ScrollTrigger } = useNuxtApp()
+
+const headerRef = ref(null)
+const isScrolled = ref(false)
 const isMenuOpen = ref(false)
-const isOrderingDropdownOpen = ref(false)
+const route = useRoute()
 
-const navigationLinks = [
-  { path: '/menu', label: 'Our Menu' },
-  { path: '/locations', label: 'Locations' },
-  { path: '/about', label: 'About' },
-  { path: '/private-events', label: 'Private Events' },
-  { path: '/reservations', label: 'Reservations' }
-]
+const hamburgerColor = computed(() => {
+  if (isMenuOpen.value) return '#ffffff'
+  return isScrolled.value ? '#000000' : '#ffffff'
+})
 
-const cities = [
-  {
-    name: 'Atlanta',
-    url: 'https://order.toasttab.com/online/kitchen-kocktails-atlanta-4400-ashford-dunwoody-rd-suite-3030'
-  },
-  {
-    name: 'Chicago',
-    url: 'https://order.toasttab.com/online/kitchen-kocktails-chicago-444-north-wabash-avenue'
-  },
-  {
-    name: 'Charlotte',
-    url: 'https://order.toasttab.com/online/kitchen-kocktails-charlotte-210-e-trade-street-a104b'
-  },
-  {
-    name: 'Dallas',
-    url: 'https://order.toasttab.com/online/kitchen-kocktails-dallas-1933-elm-street'
-  },
-  {
-    name: 'Washington D.C.',
-    url: 'https://order.toasttab.com/online/kitchen-kocktails-dc-300-i-street-nw'
-  }
-]
+const logoSrc = computed(() => {
+  return isScrolled.value ? '/logo-dark.png' : '/logo-transparent.png'
+})
 
-const socialLinks = [
-  { icon: 'uil:instagram', url: 'https://instagram.com/kitchenkocktails', label: 'Instagram' },
-  { icon: 'uil:facebook-f', url: 'https://facebook.com/kitchenkocktails', label: 'Facebook' },
-  { icon: 'uil:twitter', url: 'https://twitter.com/kitchenkocktails', label: 'Twitter' }
-]
+const updateHamburgerColor = () => {
+  const spans = document.querySelectorAll('.hamburger-button span')
+  console.log('updating spans:', spans.length)
+  if (!spans.length) return
 
-// Close mobile menu when route changes
-watch(
-  () => useRoute().fullPath,
-  () => {
-    isMenuOpen.value = false
-    isOrderingDropdownOpen.value = false
-  }
-)
-
-// Close dropdown when clicking outside
-const closeDropdown = (event) => {
-  const dropdown = document.getElementById('ordering-dropdown')
-  const button = document.getElementById('ordering-button')
-  if (!dropdown?.contains(event.target) && !button?.contains(event.target)) {
-    isOrderingDropdownOpen.value = false
-  }
+  gsap.to(spans, {
+    backgroundColor: hamburgerColor.value,
+    duration: 0.3,
+    overwrite: true
+  })
 }
 
-// Remove click event listener since we're using hover
 onMounted(() => {
-  document.removeEventListener('click', closeDropdown)
+  nextTick(() => {
+    setTimeout(() => {
+      updateHamburgerColor()
+    }, 100)
+  })
+
+  if (process.client) {
+    const mainContent = document.querySelector('#main-content')
+    if (!mainContent) return
+
+    $ScrollTrigger.create({
+      trigger: mainContent,
+      start: 'top top-=100',
+      end: 'top top-=100',
+      invalidateOnRefresh: true,
+      onToggle: (self) => {
+        console.log('ScrollTrigger fired. Active:', self.isActive)
+        isScrolled.value = self.isActive
+        updateHamburgerColor()
+      }
+    })
+
+    const tl = $gsap.timeline({
+      scrollTrigger: {
+        trigger: '#main-content',
+        start: 'top top-=100',
+        end: 'top top-=100',
+        scrub: 0.75,
+        ease: 'ease.inOut'
+      }
+    })
+
+    tl.to(headerRef.value, {
+      backgroundColor: '#f2f0ed',
+      duration: 0.75
+    })
+    tl.to(
+      '.nav-link',
+      {
+        color: '#000000',
+        duration: 0.3
+      },
+      '<-0.1'
+    )
+  }
+
+  setTimeout(() => {
+    $ScrollTrigger.refresh()
+    updateHamburgerColor()
+  }, 300)
 })
 
-onUnmounted(() => {
-  document.removeEventListener('click', closeDropdown)
+watch([isMenuOpen, isScrolled], () => {
+  updateHamburgerColor()
 })
 
-// Add a computed property to check if we're on the menu page
-// Add this computed property
-const route = useRoute()
-const isHomePage = computed(() => route.path === '/')
+const navigationLinks = [
+  { path: '/', label: 'Home', image: '/hero-7.jpeg' },
+  { path: '/menu', label: 'Our Menu', image: '/hero-1.jpg' },
+  { path: '/about', label: 'About', image: '/hero-3.jpg' },
+  { path: '/locations', label: 'Locations', image: '/hero-2.jpg' },
+  { path: '/private-events', label: 'Private Events', image: '/hero-4.jpg' },
+  { path: '/reservations', label: 'Reservations', image: '/hero-6.jpg' },
+  { path: '/gift-cards', label: 'Gift Cards', image: '/hero-5.jpg' },
+  { path: '/contact', label: 'Contact', image: '/hero-7.jpeg' }
+]
 
-// Add a ref for the header
-// Remove these lines since we won't need them anymore
-// const headerRef = ref(null)
-// const isHeaderDark = ref(false)
+watch(
+  () => route.fullPath,
+  () => {
+    if (isMenuOpen.value) isMenuOpen.value = false
+  }
+)
 </script>
 
 <template>
-  <header
-    :class="[
-      'fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-brand-dark text-white bg-brand-body shadow-sm'
-    ]"
-  >
-    <LayoutContainAlt>
-      <nav class="mx-auto py-2 h-20 flex items-center mr-auto">
-        <!-- Logo -->
-        <NuxtLink to="/" class="relative z-52 w-[350px]">
-          <img
-            src="/logo-transparent.png"
-            alt="Kitchen + Cocktails"
-            class="h-12 w-auto transition-opacity duration-300"
-          />
-        </NuxtLink>
-
-        <!-- Desktop Navigation -->
-        <div class="hidden lg:flex flex-1 items-center justify-center">
-          <div class="absolute left-1/2 -translate-x-1/2 flex items-center space-x-8">
-            <NuxtLink
-              v-for="link in navigationLinks"
-              :key="link.path"
-              :to="link.path"
-              class="transition-colors text-md duration-200 font-semibold hover:text-primary"
-            >
-              {{ link.label }}
+  <header ref="headerRef" class="app-header fixed top-0 left-0 w-full z-50 text-white">
+    <LayoutContain>
+      <nav class="py-6 h-auto flex w-full">
+        <div class="flex flex-row justify-between w-full items-center">
+          <div class="flex justify-start items-center space-x-6 f-text-11-12">
+            <BaseHamburgerButton
+              :is-open="isMenuOpen"
+              class="hamburger-button"
+              @click="isMenuOpen = !isMenuOpen"
+            />
+            <NuxtLink to="/" class="z-[149] justify-self-start">
+              <NuxtImg
+                :key="logoSrc"
+                :src="logoSrc"
+                alt="Kitchen + Cocktails"
+                class="h-11 w-auto transition-opacity duration-300"
+                quality="80"
+                format="webp"
+                preload
+              />
             </NuxtLink>
           </div>
-        </div>
 
-        <!-- Action Buttons -->
-        <div class="lg:flex items-center space-x-1 w-[350px] justify-end">
-          <div class="relative group hidden">
-            <!-- Location -->
-
-            <!-- Dropdown Menu -->
-            <div
-              id="ordering-dropdown"
-              class="invisible group-hover:visible opacity-0 group-hover:opacity-100 absolute top-full left-0 mt-2 w-48 bg-white rounded shadow-md z-50 transition-all duration-200"
-            >
-              <a
-                v-for="city in cities"
-                :key="city.name"
-                :href="city.url"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-primary transition-colors duration-200"
-              >
-                {{ city.name }}
-              </a>
-            </div>
-          </div>
-
-          <NuxtLink
-            to="/reservations"
-            class="border-3 hidden text-brand-light px-5.5 py-2 tracking-wide uppercase text-sm font-bold hover:text-brand-light transition-colors duration-200"
-          >
-            Reserve a table
-          </NuxtLink>
-        </div>
-
-        <!-- Mobile Menu Button -->
-        <button
-          @click="isMenuOpen = !isMenuOpen"
-          class="lg:hidden fixed top-6 right-4 z-60 p-2"
-          aria-label="Toggle menu"
-        >
-          <div class="w-6 h-4 flex flex-col justify-between">
-            <span
-              class="w-full h-0.5 bg-white transition-all duration-200 origin-center"
-              :class="{ 'rotate-45 translate-y-[7px]': isMenuOpen }"
-            />
-            <span
-              class="w-full h-0.5 bg-white transition-opacity duration-200"
-              :class="{ 'opacity-0': isMenuOpen }"
-            />
-            <span
-              class="w-full h-0.5 bg-white transition-all duration-200 origin-center"
-              :class="{ '-rotate-45 -translate-y-[7px]': isMenuOpen }"
-            />
-          </div>
-        </button>
-
-        <!-- Mobile Menu -->
-        <div
-          class="lg:hidden fixed inset-0 bg-brand-dark backdrop-blur-md z-40 transition-opacity duration-300"
-          :class="{ 'opacity-100': isMenuOpen, 'opacity-0 pointer-events-none': !isMenuOpen }"
-        >
-          <div class="container mx-auto px-4 pt-32 flex flex-col items-center space-y-6">
-            <NuxtLink
-              v-for="link in navigationLinks"
-              :key="link.path"
-              :to="link.path"
-              class="text-xl text-white hover:text-primary transition-colors duration-200"
-              @click="isMenuOpen = false"
-            >
-              {{ link.label }}
-            </NuxtLink>
-
-            <!-- Mobile Action Buttons -->
-            <div class="flex flex-col space-y-4 w-full max-w-xs mt-4">
+          <div class="flex justify-end items-center space-x-4 f-text-11-12">
+            <div class="flex flex-row items-center gap-8">
               <NuxtLink
-                to="/reservations"
-                class="bg-brand-accent text-white px-8 py-3 hover:bg-brand-accent/90 transition-colors duration-200 text-xl text-center"
-                @click="isMenuOpen = false"
+                v-for="link in navigationLinks.slice(1, 5)"
+                :key="link.path"
+                :to="link.path"
+                class="nav-link f-text-11-12 mt-1 font-semibold md:flex hidden uppercase tracking-wider hover:text-brand-accent transition-colors duration-200"
               >
-                Reservations
+                {{ link.label }}
               </NuxtLink>
-            </div>
-
-            <!-- Social Icons -->
-            <div class="fixed bottom-8 left-0 w-full flex justify-center space-x-6">
-              <a
-                v-for="link in socialLinks"
-                :key="link.url"
-                :href="link.url"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="hover:text-primary transition-colors duration-200"
-                :aria-label="link.label"
+              <button
+                class="f-text-12-13 font-semibold uppercase rounded-0.5 max-w-xs bg-brand-accent border border-brand-accent text-white hover:bg-brand-accent/90 f-py-6-8 f-px-24-32 tracking-wider hover:ease-in-out transition-colors duration-300"
+                aria-label="View our menu button"
               >
-                <Icon :name="link.icon" class="w-6 h-6" />
-              </a>
+                Make a reservation
+              </button>
             </div>
           </div>
         </div>
       </nav>
-    </LayoutContainAlt>
+    </LayoutContain>
 
-    <!-- Menu Categories Bar (removed v-if condition) -->
-    <div class="bg-white">
+    <LazyFeaturesHeaderMenu
+      :is-open="isMenuOpen"
+      :navigation-links="navigationLinks"
+      @close="isMenuOpen = false"
+    />
+
+    <div class="menu-categories-template bg-white">
       <slot name="menu-categories"></slot>
     </div>
   </header>
 </template>
 
-<style>
-/* Remove the .scrolled class as we're using GSAP for animations */
-</style>
+<style scoped></style>

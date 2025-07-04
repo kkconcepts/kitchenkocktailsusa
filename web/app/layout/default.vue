@@ -1,8 +1,7 @@
+<script setup></script>
+
 <template>
-  <div class="page">
-    <SpeedInsights />
+  <div class="wrapper">
     <slot />
   </div>
 </template>
-
-<style scoped></style>
