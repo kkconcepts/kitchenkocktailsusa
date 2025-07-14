@@ -57,12 +57,15 @@ watch(isMenuOpen, (open) => {
         <div class="w-full flex justify-end items-center col-span-2 gap-6">
           <button
             class="uppercase f-text-12-13 font-semibold py-2 px-4 rounded-sm bg-white text-black"
+            aria-label="Make a reservation button"
+            to="/reservations"
           >
             Make a reservation
           </button>
           <button
             ref="buttonRef"
             class="relative w-8 h-4 z-[151] flex items-center justify-center"
+            aria-label="Open Menu button"
             @click="isMenuOpen = !isMenuOpen"
           >
             <span class="absolute w-full h-[1.25px] bg-white transform -translate-y-[5px]"></span>
