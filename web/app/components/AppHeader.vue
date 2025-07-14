@@ -55,13 +55,13 @@ watch(isMenuOpen, (open) => {
         </div>
         <!-- Keep this wrapping div for layout alignment -->
         <div class="w-full flex justify-end items-center col-span-2 gap-6">
-          <button
+          <NuxtLink
             class="uppercase f-text-12-13 font-semibold py-2 px-4 rounded-sm bg-white text-black"
             aria-label="Make a reservation button"
             to="/reservations"
           >
             Make a reservation
-          </button>
+          </NuxtLink>
           <button
             ref="buttonRef"
             class="relative w-8 h-4 z-[151] flex items-center justify-center"
