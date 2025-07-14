@@ -24,13 +24,11 @@ const handleError = () => {
         <div class="mx-auto flex flex-col items-center justify-center gap-4 max-w-xs">
           <NuxtLink
             to="/reservations"
-            class="f-text-12-13 uppercase bg-brand-accent border border-brand-accent text-white hover:text-brand-accent hover:bg-white/0 f-py-6-8 f-px-24-32 tracking-wider transition-colors duration-300"
+            class="f-text-12-13 font-semibold uppercase text-center rounded-0.5 max-w-xs bg-brand-accent border border-brand-accent text-white hover:bg-brand-accent/90 f-py-6-8 f-px-24-32 tracking-wider hover:ease-in-out transition-colors duration-300"
           >
             Reserve your table
           </NuxtLink>
-          <div
-            class="flex flex-col hover:text-brand-accent text-white transition-colors duration-300"
-          >
+          <div class="flex flex-col text-white transition-colors duration-300">
             <button @click="handleError" class="font-light">or back to homepage</button>
             <div class="line h-0.25 w-full bg-white" />
           </div>

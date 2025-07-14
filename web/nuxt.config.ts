@@ -5,9 +5,6 @@ export default defineNuxtConfig({
     compatibilityVersion: 4
   },
   css: ['@/assets/css/main.css', '@unocss/reset/tailwind.css'],
-  features: {
-    inlineStyles: false
-  },
   nitro: {
     prerender: {
       routes: ['/']
@@ -17,10 +14,20 @@ export default defineNuxtConfig({
     host: '0.0.0.0',
     port: 3000
   },
-  modules: ['@unocss/nuxt', '@nuxt/image', '@nuxt/icon', '@nuxtjs/seo', '@nuxtjs/sanity'],
+  experimental: {
+    renderJsonPayloads: true
+  },
+  modules: [
+    '@unocss/nuxt',
+    '@nuxt/image',
+    '@nuxt/icon',
+    '@nuxtjs/seo',
+    '@nuxtjs/sanity',
+    'nuxt-swiper'
+  ],
   image: {
     quality: 80,
-    format: ['webp'],
+    format: ['avif', 'webp'],
     screens: {
       xs: 320,
       sm: 640,
@@ -28,16 +35,6 @@ export default defineNuxtConfig({
       lg: 1024,
       xl: 1280,
       xxl: 1536
-    },
-    preload: true,
-    domains: ['kitchenkocktailsusa.com'],
-    provider: 'ipx',
-    ipx: {
-      modifiers: {
-        format: 'webp',
-        quality: '80',
-        progressive: true
-      }
     }
   },
   build: {
@@ -68,8 +65,10 @@ export default defineNuxtConfig({
       listID: process.env.MAILCHIMP_LIST_ID
     }
   },
+  imports: {
+    dirs: ['queries', 'utils']
+  },
   app: {
-    pageTransition: { name: 'page-transition', mode: 'out-in' },
     head: {
       meta: [
         { charset: 'utf-8' },

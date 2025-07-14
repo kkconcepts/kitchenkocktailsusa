@@ -1,12 +1,19 @@
 <script setup>
 import { ogImage } from '~/constants'
+import { useParallaxEffects } from '~/composables/useParallaxEffects'
+import { ref } from 'vue'
+import { transition } from '~/utils/transition'
+
+definePageMeta({
+  pageTransition: transition
+})
+
+useParallaxEffects()
 
 const title = ref('Terms of Service')
 const pageDescription = ref(
-  'See how Kitchen + Kocktails by Kevin Kelley collects, uses & safeguards your personal data. Transparent, secure, and customer‑focused.'
+  'See how Kitchen + Kocktails by Kevin Kelley collects, uses & safeguards your personal data. Transparent, secure, and customer‑focused.'
 )
-
-const pageClass = computed(() => `page page-${title.value.toLowerCase()}`)
 
 useSeoMeta({
   title: title,
@@ -19,7 +26,7 @@ useSeoMeta({
 </script>
 
 <template>
-  <div :class="pageClass">
+  <diV>
     <section class="min-h-100vh max-w-3xl m-auto f-py-160-180">
       <LayoutContain>
         <div class="flex flex-col f-gap-32-48">
@@ -117,5 +124,5 @@ useSeoMeta({
         </div>
       </LayoutContain>
     </section>
-  </div>
+  </diV>
 </template>

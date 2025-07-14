@@ -1,5 +1,24 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
+
+const props = defineProps({
+  searchQuery: {
+    type: String,
+    default: ''
+  },
+  selectedCity: {
+    type: String,
+    default: 'atlanta'
+  },
+  selectedType: {
+    type: String,
+    default: 'all'
+  },
+  onUpdate: {
+    type: Function,
+    default: null
+  }
+})
 
 const isSearchExpanded = ref(false)
 const searchQuery = ref('')

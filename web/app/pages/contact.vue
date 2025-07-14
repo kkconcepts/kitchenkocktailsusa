@@ -1,70 +1,29 @@
 <script setup>
 import { ogImage } from '~/constants'
+import { useContact } from '~/composables/useContact'
+import { ref } from 'vue'
+import { useParallaxEffects } from '~/composables/useParallaxEffects'
+import { useFirstScreenAnimation } from '~/composables/useFirstScreenAnimation'
+import { useScrollContentAnimation } from '~/composables/useScrollContentAnimation'
+import { transition } from '~/utils/transition'
+
+definePageMeta({
+  pageTransition: transition
+})
+
+useScrollContentAnimation()
+useParallaxEffects()
+
+onMounted(async () => {
+  await useFirstScreenAnimation('.page-content') // or whatever wraps your content
+})
 
 const title = ref('Contact')
 const pageDescription = ref(
   'Have questions, feedback, or event inquiries? Reach out to our team and well be in touch.'
 )
 
-const pageClass = computed(() => `page page-${title.value.toLowerCase()}`)
-
-const form = ref({
-  firstName: '',
-  lastName: '',
-  email: '',
-  phone: '',
-  location: '',
-  inquiryType: '',
-  message: ''
-})
-
-const locations = [
-  { value: 'atlanta', label: 'Atlanta' },
-  { value: 'chicago', label: 'Chicago' },
-  { value: 'charlotte', label: 'Charlotte' },
-  { value: 'dallas', label: 'Dallas' },
-  { value: 'dc', label: 'Washington D.C.' }
-]
-
-const inquiryTypes = [
-  { value: 'large-party', label: 'Large Party Reservation' },
-  { value: 'private-event', label: 'Private Event' },
-  { value: 'catering', label: 'Catering' },
-  { value: 'other', label: 'Other' }
-]
-
-const handleSubmit = async () => {
-  try {
-    const { data, error } = await useFetch('/api/contact', {
-      method: 'POST',
-      body: form.value
-    })
-
-    if (error.value) {
-      console.error('Submission failed:', error.value)
-      alert('Something went wrong. Please try again later.')
-      return
-    }
-
-    if (data.value?.success) {
-      alert('Message sent! We’ll get back to you soon.')
-      form.value = {
-        firstName: '',
-        lastName: '',
-        email: '',
-        phone: '',
-        location: '',
-        inquiryType: '',
-        message: ''
-      }
-    } else {
-      alert('There was an issue sending your message.')
-    }
-  } catch (err) {
-    console.error('Unexpected error:', err)
-    alert('Could not send. Please try again.')
-  }
-}
+const { form, locations, inquiryTypes, handleSubmit } = useContact()
 
 useSeoMeta({
   title: title,
@@ -77,10 +36,7 @@ useSeoMeta({
 </script>
 
 <template>
-  <div :class="pageClass" class="">
-    <section class="section">
-      <SectionsHeroPage title="Contact" image="/hero-2.jpg" />
-    </section>
+  <div class="">
     <section class="max-w-90rem mx-auto f-py-160-180">
       <div class="grid grid-cols-2 gap-16">
         <!-- Left Column: Contact Info -->
@@ -149,7 +105,8 @@ useSeoMeta({
                 v-model="form.firstName"
                 type="text"
                 required
-                class="px-4 py-2 rounded-0.5 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors duration-200"
+                placeholder="John"
+                class="px-4 py-2 rounded-0.5 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors duration-200 placeholder:text-gray-400"
               />
             </div>
             <div class="flex flex-col">
@@ -159,7 +116,8 @@ useSeoMeta({
                 v-model="form.lastName"
                 type="text"
                 required
-                class="px-4 py-2 rounded-0.5 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors duration-200"
+                placeholder="Doe"
+                class="px-4 py-2 rounded-0.5 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors duration-200 placeholder:text-gray-400"
               />
             </div>
           </div>
@@ -173,7 +131,8 @@ useSeoMeta({
                 v-model="form.email"
                 type="email"
                 required
-                class="px-4 py-2 rounded-0.5 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors duration-200"
+                placeholder="your.email@example.com"
+                class="px-4 py-2 rounded-0.5 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors duration-200 placeholder:text-gray-400"
               />
             </div>
             <div class="flex flex-col">
@@ -183,13 +142,15 @@ useSeoMeta({
                 v-model="form.phone"
                 type="tel"
                 required
-                class="px-4 py-2 rounded-0.5 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors duration-200"
+                placeholder="(123) 456-7890"
+                class="px-4 py-2 rounded-0.5 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors duration-200 placeholder:text-gray-400"
               />
             </div>
           </div>
 
           <!-- Location and Inquiry Type Fields -->
           <div class="grid grid-cols-2 gap-4">
+            <!-- Location Field -->
             <div class="flex flex-col">
               <label for="location" class="text-sm mb-2">Location*</label>
               <div class="relative inline-flex items-center w-full">
@@ -198,9 +159,9 @@ useSeoMeta({
                   id="location"
                   v-model="form.location"
                   required
-                  class="w-full rounded-0.5 pl-8 pr-8 py-2.5 appearance-none focus:outline-none font-regular text-sm"
+                  class="w-full rounded-0.5 pl-8 pr-8 py-2.5 appearance-none focus:outline-none font-regular text-sm text-gray-900"
                 >
-                  <option value="" disabled>Select a location</option>
+                  <option value="" disabled class="text-gray-400">Select a location</option>
                   <option
                     v-for="location in locations"
                     :key="location.value"
@@ -212,6 +173,8 @@ useSeoMeta({
                 <Icon name="uil:angle-down" class="absolute right-2 w-4 h-4" />
               </div>
             </div>
+
+            <!-- Inquiry Type Field -->
             <div class="flex flex-col">
               <label for="inquiryType" class="text-sm mb-2">Inquiry Type*</label>
               <div class="relative inline-flex items-center w-full">
@@ -220,9 +183,9 @@ useSeoMeta({
                   id="inquiryType"
                   v-model="form.inquiryType"
                   required
-                  class="w-full pl-8 rounded-0.5 pr-8 py-2.5 appearance-none focus:outline-none font-regular text-sm"
+                  class="w-full pl-8 rounded-0.5 pr-8 py-2.5 appearance-none focus:outline-none font-regular text-sm text-gray-900"
                 >
-                  <option value="" disabled>Select inquiry type</option>
+                  <option value="" disabled class="text-gray-400">Select inquiry type</option>
                   <option v-for="type in inquiryTypes" :key="type.value" :value="type.value">
                     {{ type.label }}
                   </option>
@@ -240,7 +203,8 @@ useSeoMeta({
               v-model="form.message"
               required
               rows="4"
-              class="px-4 py-2.5 rounded-0.5 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors duration-200"
+              placeholder="Please tell us how we can help you..."
+              class="px-4 py-2.5 rounded-0.5 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors duration-200 placeholder:text-gray-400"
             ></textarea>
           </div>
 
@@ -254,5 +218,10 @@ useSeoMeta({
         </form>
       </div>
     </section>
+    <section>
+      <SectionsLocationsAlt />
+    </section>
   </div>
 </template>
+
+<style scoped></style>

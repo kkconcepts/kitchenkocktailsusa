@@ -50,7 +50,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <section class="hero bg-brand-dark relative">
+  <div class="hero relative">
     <div class="slider-container">
       <div
         v-for="(slide, index) in slides"
@@ -58,51 +58,33 @@ onMounted(() => {
         class="slide"
         :class="{ active: index === currentSlide }"
       >
-        <NuxtImg :src="slide.src" :alt="slide.alt" class="slide-image" loading="eager" />
-      </div>
-
-      <!-- Navigation Arrows -->
-      <div class="navigation-arrows hidden">
-        <button class="nav-button prev" @click="prevSlide" :disabled="isTransitioning">
-          <Icon name="uil:angle-left" class="text-2xl" />
-        </button>
-        <button class="nav-button next" @click="nextSlide" :disabled="isTransitioning">
-          <Icon name="uil:angle-right" class="text-2xl" />
-        </button>
-      </div>
-
-      <!-- Slide Indicators -->
-      <div class="indicators">
-        <button
-          v-for="(_, index) in slides"
-          :key="index"
-          class="indicator"
-          :class="{ active: index === currentSlide }"
-          @click="currentSlide = index"
+        <NuxtImg
+          :src="slide.src"
+          :alt="slide.alt"
+          format="webp"
+          class="slide-image"
+          data-speed="0.9"
         />
       </div>
+
+      <!-- Bottom gradient overlay to blend with warm-gray-800 -->
+      <div class="bottom-gradient hidden"></div>
+
+      <!-- Slide Indicators -->
     </div>
 
-    <div class="absolute bottom-0 left-0 right-0 f-py-8-12 text-white">
+    <div class="absolute bottom-0 left-0 right-0 f-py-16-24 text-white">
       <LayoutContain>
-        <div class="flex flex-col justify-start items-start w-full h-full stagger-fade-in">
-          <p
-            class="f-text-11-12 mb-4 text-start tracking-0.75 font-semibold uppercase text-brand-accent"
-          >
-            KITCHEN + KOCKTAILS
-          </p>
+        <div data-type="stagger" class="flex flex-col justify-start items-start w-full h-full">
           <h1
-            class="f-text-28-72 leading-[95%] tracking-0.25 font-gt-ultra max-w-xl font-medium text-start uppercase mb-4"
+            class="animate-child z-[150] f-text-34-72 leading-[95%] hidden animate-text tracking-0.25 font-gt-ultra font-medium text-start uppercase mb-4"
           >
             {{ title }}
           </h1>
-          <p v-if="description" class="text-lg max-w-xl">
-            {{ description }}
-          </p>
         </div>
       </LayoutContain>
     </div>
-  </section>
+  </div>
 </template>
 
 <style scoped>
@@ -136,6 +118,18 @@ onMounted(() => {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+/* Bottom gradient to blend with warm-gray-800 background */
+.bottom-gradient {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 25%;
+  background: linear-gradient(to top, #000000 0%, rgba(0, 0, 0, 0) 100%);
+  pointer-events: none;
+  z-index: 5;
 }
 
 .nav-button {
@@ -201,5 +195,15 @@ onMounted(() => {
 
 .indicator.active {
   background: white;
+}
+
+/* Style for the navigation buttons */
+.btn-contain {
+  position: relative;
+}
+
+.btn-contain button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 </style>

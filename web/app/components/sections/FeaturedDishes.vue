@@ -1,13 +1,6 @@
 <script setup>
-// Fetch featured dishes from Sanity
-const { data: featuredDishes } = await useSanityQuery(groq`
-  *[_type == "menuItem" && featured == true] {
-    _id,
-    name,
-    image,
-    slug
-  }
-`)
+const { getFeaturedDishes } = useMenu()
+const { data: featuredDishes } = await getFeaturedDishes()
 </script>
 
 <template>

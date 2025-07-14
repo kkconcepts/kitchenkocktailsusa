@@ -1,12 +1,16 @@
 <script setup>
 import { ogImage } from '~/constants'
+import { transition } from '~/utils/transition'
+
+
+definePageMeta({
+  transition: transition
+})
 
 const title = ref('Privacy Policy')
 const pageDescription = ref(
-  'See how Kitchen + Kocktails by Kevin Kelley collects, uses & safeguards your personal data. Transparent, secure, and customer‑focused.'
+  'See how Kitchen + Kocktails by Kevin Kelley collects, uses & safeguards your personal data. Transparent, secure, and customer‑focused.'
 )
-
-const pageClass = computed(() => `page page-${title.value.toLowerCase()}`)
 
 useSeoMeta({
   title: title,
@@ -19,7 +23,7 @@ useSeoMeta({
 </script>
 
 <template>
-  <div :class="pageClass">
+  <LayoutSmooth ref="main">
     <section class="min-h-100vh max-w-3xl m-auto f-py-160-180">
       <LayoutContain>
         <div class="flex flex-col f-gap-32-48 leading-regular">
@@ -134,5 +138,5 @@ useSeoMeta({
         </div>
       </LayoutContain>
     </section>
-  </div>
+  </LayoutSmooth>
 </template>

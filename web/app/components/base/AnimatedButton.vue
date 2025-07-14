@@ -1,6 +1,6 @@
 <template>
   <button
-    class="button f-text-12-13 font-semibold uppercase rounded-0.5 max-w-xs bg-brand-accent border border-brand-accent text-brand-accent f-py-6-8 f-px-24-32 tracking-wider transition-colors duration-300"
+    class="button f-text-12-13 font-semibold uppercase rounded-0.5 max-w-xs bg-brand-accent border border-brand-accent text-brand-accent f-py-6-8 f-px-16-20 tracking-wider transition-colors duration-300"
     :class="buttonClass"
     :aria-label="ariaLabel"
   >

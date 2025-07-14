@@ -1,9 +1,15 @@
 <script setup>
+import { onBeforeUnmount } from 'vue'
 import { ogImage } from '~/constants'
+import { transition } from '~/utils/transition'
+
+definePageMeta({
+  pageTransition: transition
+})
 
 const title = ref('Cookie Policy')
 const pageDescription = ref(
-  'See how Kitchen + Kocktails by Kevin Kelley collects, uses & safeguards your personal data. Transparent, secure, and customer‑focused.'
+  'See how Kitchen + Kocktails by Kevin Kelley collects, uses & safeguards your personal data. Transparent, secure, and customer‑focused.'
 )
 
 const pageClass = computed(() => `page page-${title.value.toLowerCase()}`)

@@ -16,25 +16,25 @@ export const useMailchimp = () => {
     success.value = false
   }
 
-  const handleInput = async () => {
-    if (isEmailStep.value) {
-      if (email.value && email.value.includes('@')) {
-        isEmailStep.value = false // Switch to name input
-      }
-    } else {
-      if (name.value) {
-        // Submit both email and name
-        await submitSubscription()
+    const handleInput = async () => {
+      if (isEmailStep.value) {
+        if (email.value && email.value.includes('@')) {
+          isEmailStep.value = false // Switch to name input
+        }
+      } else {
+        if (name.value) {
+          // Submit both email and name
+          await submitSubscription()
+        }
       }
     }
-  }
 
   const submitSubscription = async () => {
     if (!email.value || !name.value) return
 
     isLoading.value = true
     error.value = ''
-
+    
     try {
       const response = await fetch('/api/subscribe', {
         method: 'POST',

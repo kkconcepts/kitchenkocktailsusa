@@ -1,46 +1,15 @@
 <script setup>
-// Get the slug from the route
+import { transition } from '~/utils/transition'
+
+definePageMeta({
+  pageTransition: transition
+})
+
 const route = useRoute()
 const { slug } = route.params
 
-// Query to fetch the specific event
-const { data: event } = await useSanityQuery(
-  `*[_type == "event" && slug.current == $slug][0] {
-    _id,
-    title,
-    date,
-    endDate,
-    mainImage,
-    "imageUrl": mainImage.asset->url,
-    description,
-    specials,
-    locations
-  }`,
-  { slug }
-)
-
-// Format date range
-const formattedDate = computed(() => {
-  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
-  const startDate = new Date(event.value.date).toLocaleDateString('en-US', options)
-  if (event.value.endDate) {
-    const endDate = new Date(event.value.endDate).toLocaleDateString('en-US', options)
-    return `${startDate} - ${endDate}`
-  }
-  return startDate
-})
-
-// City name mapping
-const cityNames = {
-  chicago: 'Chicago',
-  dallas: 'Dallas',
-  atlanta: 'Atlanta',
-  charlotte: 'Charlotte',
-  'washington-dc': 'Washington, D.C.'
-}
-
-// Format city name
-const formatCityName = (city) => cityNames[city] || city
+const { getEventBySlug } = useEvents()
+const { data: event } = await getEventBySlug(slug)
 </script>
 
 <template>

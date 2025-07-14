@@ -1,99 +1,8 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useMailchimp } from '~/composables/useMailchimp'
-
-const links = [
-  { name: 'about', path: '/about', label: 'About' },
-  { name: 'menu', path: '/menu', label: 'Our Menu' },
-  { name: 'locations', path: '/locations', label: 'Locations' },
-  { name: 'private events', path: '/private-events', label: 'Private Events' },
-  { name: 'contact', path: '/contact', label: 'Contact' }
-]
-
-const lowerLinks = [
-  { name: 'privacy policy', path: '/privacy-policy', label: 'Privacy Policy' },
-  { name: 'terms of service', path: '/terms-of-service', label: 'Terms of Service' },
-  { name: 'cookie policy', path: '/cookie-policy', label: 'Cookie Policy' },
-  { name: 'faq', path: '/faq', label: 'FAQ' }
-]
-
-const cities = [
-  {
-    name: 'Atlanta',
-    kitchen: [
-      { days: 'Mon–Thu', hours: '11am - 10pm' },
-      { days: 'Fri', hours: '11am - 11pm' },
-      { days: 'Sat', hours: '10am - 11pm' },
-      { days: 'Sunday', hours: '10am - 11pm' }
-    ],
-    bar: [
-      { days: 'Mon–Thu', hours: '11am - 10pm' },
-      { days: 'Fri', hours: '11am - 11pm' },
-      { days: 'Sat', hours: '10am - 11pm' },
-      { days: 'Sunday', hours: '10am - 11pm' }
-    ]
-  },
-  {
-    name: 'Chicago',
-    kitchen: [
-      { days: 'Mon–Thu', hours: '5pm - 10pm' },
-      { days: 'Fri', hours: '11am - 12am' },
-      { days: 'Sat', hours: '11am - 12am' },
-      { days: 'Sunday', hours: '11am - 11pm' }
-    ],
-    bar: [
-      { days: 'Mon–Thu', hours: '5pm - 10pm' },
-      { days: 'Fri', hours: '11am - 12am' },
-      { days: 'Sat', hours: '11am - 12am' },
-      { days: 'Sunday', hours: '11am - 11pm' }
-    ]
-  },
-  {
-    name: 'Charlotte',
-    kitchen: [
-      { days: 'Mon–Thu', hours: '11am - 10pm' },
-      { days: 'Fri', hours: '11am - 11pm' },
-      { days: 'Sat', hours: '11am - 12am' },
-      { days: 'Sunday', hours: '11am - 10pm' }
-    ],
-    bar: [
-      { days: 'Mon–Thu', hours: '11am - 10pm' },
-      { days: 'Fri', hours: '11am - 11pm' },
-      { days: 'Sat', hours: '11am - 12am' },
-      { days: 'Sunday', hours: '11am - 10pm' }
-    ]
-  },
-  {
-    name: 'Dallas',
-    kitchen: [
-      { days: 'Mon–Thu', hours: '11am - 10pm' },
-      { days: 'Fri', hours: '11am - 11pm' },
-      { days: 'Sat', hours: '10am - 11pm' },
-      { days: 'Sunday', hours: '10am - 11pm' }
-    ],
-    bar: [
-      { days: 'Mon–Thu', hours: '11am - 10pm' },
-      { days: 'Fri', hours: '11am - 11pm' },
-      { days: 'Sat', hours: '10am - 11pm' },
-      { days: 'Sunday', hours: '10am - 11pm' }
-    ]
-  },
-  {
-    name: 'Washington D.C.',
-    kitchen: [
-      { days: 'Mon–Thu', hours: '11am - 10pm' },
-      { days: 'Fri', hours: '11am - 11pm' },
-      { days: 'Sat', hours: '10am - 11pm' },
-      { days: 'Sunday', hours: '10am - 10pm' }
-    ],
-    bar: [
-      { days: 'Mon–Thu', hours: '11am - 10pm' },
-      { days: 'Fri', hours: '11am - 11pm' },
-      { days: 'Sat', hours: '10am - 11pm' },
-      { days: 'Sunday', hours: '10am - 10pm' }
-    ]
-  }
-]
+import { cities } from '~/utils/locationHours'
+import { topLinks, lowerLinks } from '~/utils/navigationLinks'
 
 const selectedCity = ref(cities[0].name)
 
@@ -112,16 +21,16 @@ function selectCity(city) {
   dropdownOpen.value = false
 }
 
-const { email, name, isEmailStep, handleInput } = useMailchimp()
+const { email, name, isEmailStep, handleInput, success } = useMailchimp()
 </script>
 
 <template>
-  <footer class="footer text-warmGray-800">
+  <footer class="footer text-warmGray-800 mt-64 text-white">
     <div class="app-footer-top f-pt-24-48 f-mb-64-72">
       <nav>
         <div class="logo w-38 m-auto mb-12">
           <NuxtImg
-            src="/logo-dark.png"
+            src="/logo-transparent.png"
             alt="Kitchen + Kocktails"
             class="object-fit"
             quality="80"
@@ -131,16 +40,17 @@ const { email, name, isEmailStep, handleInput } = useMailchimp()
       </nav>
     </div>
     <div class="app-footer-middle">
-      <LayoutContain class="max-w-90rem">
+      <LayoutContain class="">
         <div class="grid grid-cols-1 px-6 md:grid-cols-3 gap-8 f-mb-100-140">
           <div
             class="footer-col flex flex-col f-gap-2-4 items-center md:items-start justify-start order-1"
           >
-            <h3 class="text-center md:text-start">Get the latest updates</h3>
+            <p class="text-center md:text-start">Get the latest updates</p>
             <div class="news-input relative flex flex-row w-full max-w-250px overflow-hidden">
               <transition name="slide" mode="out-in">
+                <div v-if="success" class="w-full text-warmGray-800">Subscribed!</div>
                 <input
-                  v-if="isEmailStep"
+                  v-else-if="isEmailStep"
                   v-model="email"
                   class="w-full bg-transparent border-b border-gray-200 pr-24 f-text-15-15 pb-2 outline-none placeholder:text-gray-400 transition-all duration-300"
                   type="email"
@@ -238,7 +148,7 @@ const { email, name, isEmailStep, handleInput } = useMailchimp()
       </LayoutContain>
       <div class="relative px-4 md:px-0">
         <div
-          class="absolute left-1/2 -translate-x-1/2 -bottom-85 md:-bottom-32 bg-white text-black p-6 w-[calc(100%-2rem)] md:w-full max-w-4xl flex flex-col md:flex-row gap-6 text-md z-10"
+          class="absolute left-1/2 -translate-x-1/2 -bottom-85 md:-bottom-32 p-6 w-[calc(100%-2rem)] md:w-full max-w-4xl flex flex-col md:flex-row gap-6 text-md z-10"
         >
           <!-- Kitchen Column -->
           <div class="flex-1">
@@ -267,11 +177,11 @@ const { email, name, isEmailStep, handleInput } = useMailchimp()
         </div>
       </div>
     </div>
-    <div class="app-footer bg-zinc-900">
+    <div class="app-footer">
       <div class="app-footer-inner pt-35 f-gap-24-48 min-h-65vh md:min-h-35vh">
         <div class="app-footer-btm flex flex-col h-full f-gap-4-8 text-center px-4 md:px-0">
           <ul class="flex items-center justify-center space-x-8 px-4 flex-wrap text-white">
-            <li v-for="link in links" :key="link.name">
+            <li v-for="link in topLinks" :key="link.name">
               <NuxtLink :to="link.path">{{ link.label }}</NuxtLink>
             </li>
           </ul>

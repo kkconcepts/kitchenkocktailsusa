@@ -1,5 +1,10 @@
 <script setup>
 import { ogImage } from '~/constants'
+import { transition } from '~/utils/transition'
+
+definePageMeta({
+  pageTransition: transition
+})
 
 const title = ref('Events & Promotions')
 const pageDescription = ref(
@@ -17,23 +22,8 @@ useSeoMeta({
   twitterCard: 'summary_large_image'
 })
 
-// Query to fetch all upcoming events
-const { data: events } = (await useSanityQuery(
-  `*[_type == "event" && dateTime(date) >= dateTime(now())] | order(date asc) {
-    _id,
-    title,
-    "slug": slug.current,
-    mainImage,
-    "imageUrl": mainImage.asset->url,
-    description,
-    date,
-    locations,
-    menus[] {
-      title,
-      type
-    }
-  }`
-)) || { data: [] }
+const { getAllUpcomingEvents } = useEvents()
+const { data: events } = await getAllUpcomingEvents()
 
 // Format date helper function
 const formatDate = (date) => {
@@ -48,11 +38,11 @@ const formatDate = (date) => {
 
 <template>
   <div :class="pageClass">
-    <section class="min-h-100vh bg-light-400 m-auto f-py-160-180">
+    <section class="min-h-100vh m-auto f-py-160-180">
       <LayoutContain>
         <div class="flex flex-col max-w-3xl m-auto">
           <h1 class="text-4xl text-center font-bold mb-10 uppercase">{{ title }}</h1>
-          <p class="text-lg text-center">
+          <p class="f-text-13-15 text-center">
             Great food, great vibes, and great company are just around the corner. Discover our
             growing family of restaurants and join us for a dining experience you won’t forget.
           </p>

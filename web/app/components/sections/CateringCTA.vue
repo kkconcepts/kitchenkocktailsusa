@@ -23,7 +23,7 @@ defineProps({
   },
   backgroundImage: {
     type: String,
-    default: '/slider-7.jpg'
+    default: '/slider-3.jpg'
   }
 })
 </script>
@@ -42,7 +42,7 @@ defineProps({
 
     <!-- Content -->
     <div
-      class="relative z-10 w-full h-full flex items-center justify-center mx-auto py-40 w-full text-white"
+      class="relative z-10 w-full h-full flex items-center justify-center mx-auto py-20 w-full text-white"
     >
       <div class="max-w-2xl w-full h-full flex flex-col items-center justify-center flex gap-4">
         <p class="f-text-11-12 text-center tracking-0.25 font-semibold uppercase text-brand-accent">
@@ -57,12 +57,13 @@ defineProps({
           From intimate dinners to grand celebrations, our team crafts unforgettable experiences for
           groups of 10 or more.
         </p>
-        <button
+        <NuxtLink
           class="f-text-12-13 font-semibold uppercase rounded-0.5 max-w-xs bg-brand-accent border border-brand-accent text-white hover:bg-brand-accent/90 f-py-6-8 f-px-24-32 tracking-wider hover:ease-in-out transition-colors duration-300"
           aria-label="View our menu button"
+          to="/private-events/make-a-request"
         >
           Contact our events team
-        </button>
+        </NuxtLink>
       </div>
     </div>
   </section>

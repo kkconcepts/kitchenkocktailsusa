@@ -3,76 +3,14 @@ import { onMounted, ref, nextTick } from 'vue'
 import { gsap } from 'gsap'
 import { Draggable } from 'gsap/Draggable'
 import { InertiaPlugin } from 'gsap/InertiaPlugin'
+import { sliderDishes } from '~/utils/sliderDishes'
 
 gsap.registerPlugin(Draggable, InertiaPlugin)
-
-const dishes = [
-  {
-    src: '/slider-1.jpg',
-    name: 'Lamb Chops',
-    altText: 'A close-up shot of crispy spicy fried chicken.',
-    link: '/menu/grilled-salmon'
-  },
-  {
-    src: '/slider-2.jpg',
-    name: 'Fried Chicken',
-    altText: 'A close-up shot of crispy spicy fried chicken.',
-    link: '/menu/grilled-salmon'
-  },
-  {
-    src: '/slider-3.jpg',
-    name: 'Spicy Fried Chicken',
-    altText: 'A close-up shot of crispy spicy fried chicken.',
-    link: '/menu/grilled-salmon'
-  },
-  {
-    src: '/slider-4.jpg',
-    name: 'Spicy Fried Chicken',
-    altText: 'A close-up shot of crispy spicy fried chicken.',
-    link: '/menu/grilled-salmon'
-  },
-  {
-    src: '/slider-5.jpg',
-    name: 'Spicy Fried Chicken',
-    altText: 'A close-up shot of crispy spicy fried chicken.',
-    link: '/menu/grilled-salmon'
-  },
-  {
-    src: '/slider-6.jpg',
-    name: 'Spicy Fried Chicken',
-    altText: 'A close-up shot of crispy spicy fried chicken.',
-    link: '/menu/grilled-salmon'
-  },
-  {
-    src: '/slider-7.jpg',
-    name: 'Spicy Fried Chicken',
-    altText: 'A close-up shot of crispy spicy fried chicken.',
-    link: '/menu/grilled-salmon'
-  },
-  {
-    src: '/slider-8.jpg',
-    name: 'Spicy Fried Chicken',
-    altText: 'A close-up shot of crispy spicy fried chicken.',
-    link: '/menu/grilled-salmon'
-  },
-  {
-    src: '/slider-9.jpg',
-    name: 'Spicy Fried Chicken',
-    altText: 'A close-up shot of crispy spicy fried chicken.',
-    link: '/menu/grilled-salmon'
-  },
-  {
-    src: '/slider-10.jpg',
-    name: 'Spicy Fried Chicken',
-    altText: 'A close-up shot of crispy spicy fried chicken.',
-    link: '/menu/grilled-salmon'
-  }
-]
 
 const sliderRef = ref(null)
 let draggableInstance = null
 const itemWidth = ref(0)
-const gap = 24
+const gap = 100
 let totalWidth = 0
 let containerWidth = 0
 
@@ -128,12 +66,12 @@ const moveSlider = (direction) => {
         <div class="flex flex-row justify-between items-end w-full">
           <div class="flex flex-col justify-start items-start w-full">
             <p
-              class="f-text-11-12 mb-16 text-center tracking-0.75 font-semibold uppercase text-brand-accent"
+              class="f-text-11-12 mb-10 text-center tracking-0.75 font-semibold uppercase text-brand-accent"
             >
               SIGNATURE SELECTIONS
             </p>
-            <h1 class="f-text-32-80 leading-0 font-gt-ultra text-start uppercase mb-8">
-              Our Favorite Dishes
+            <h1 class="f-text-32-72 leading-0 font-gt-ultra text-center uppercase mb-0">
+              DIVE IN TO A WORLD OF FLAVOR
             </h1>
             <p class="font-regular leading-tight max-w-xl f-text-15-17 mb-4 hidden">
               Honest products, creative dishes, and flavors that stick in your mind. Inspired by
@@ -149,7 +87,7 @@ const moveSlider = (direction) => {
     <div class="slider-wrapper">
       <div class="slider-container">
         <div class="slider relative" ref="sliderRef">
-          <div v-for="(dish, i) in dishes" :key="i" class="slider-item">
+          <div v-for="(dish, i) in sliderDishes" :key="i" class="slider-item">
             <NuxtImg
               :src="dish.src"
               :alt="dish.altText"
@@ -191,18 +129,18 @@ const moveSlider = (direction) => {
 <style scoped>
 .slider-wrapper {
   position: relative;
-  height: 540px;
+  height: 440px;
 }
 
 .slider-container {
   overflow: hidden;
   width: 100%;
-  height: 540px;
+  height: 440px;
 }
 
 .slider {
   display: flex;
-  gap: 24px;
+  gap: 100px;
   width: max-content;
   will-change: transform;
   height: 540px;
@@ -211,8 +149,8 @@ const moveSlider = (direction) => {
 .slider-item {
   position: relative;
   flex-shrink: 0;
-  width: 45vw;
-  height: 540px;
+  width: 30vw;
+  height: 440px;
   overflow: hidden;
 }
 

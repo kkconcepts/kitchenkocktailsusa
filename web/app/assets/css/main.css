@@ -35,21 +35,27 @@
   box-sizing: inherit;
 }
 
+* {
+  box-sizing: border-box;
+}
+
+a.router-link-active {
+  pointer-events: none;
+}
+
 div {
   display: block;
 }
 
 body {
-  font-family: 'Josefin Sans', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   line-height: var(--line-height);
   font-weight: 400;
-  max-width: 100vw;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior: none;
   margin: 0;
   padding: 0;
-  background-color: var(--background-color);
-  scroll-behavior: auto !important;
 }
 
 a:hover {
@@ -87,12 +93,35 @@ select:focus {
   box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
 }
 
-.page-transition-enter-active,
-.page-transition-leave-active {
-  transition: opacity 0.6s cubic-bezier(0.55, 0, 0.1, 1);
-  blur: 20px;
+html {
+  scrollbar-gutter: stable;
 }
-.page-transition-enter-from,
-.page-transition-leave-to {
-  opacity: 0;
+
+body {
+  color: white;
+  background-color: black;
+  overflow-y: scroll; /* Always show scrollbar */
+  /* Or if you prefer to match system behavior */
+  @supports not (scrollbar-gutter: stable) {
+    margin-right: calc(100vw - 100%);
+  }
+}
+
+.app-header.inverted {
+  background-color: white;
+  color: black;
+}
+
+.app-header.inverted .header-element {
+  color: black;
+}
+
+.app-header.inverted .nav-item {
+  color: black;
+}
+
+.app-header.inverted button {
+  background-color: black;
+  color: white;
+  border-color: black;
 }
