@@ -77,16 +77,18 @@ useSeoMeta({
                   and purpose.
                 </p>
                 <div class="flex space-x-4 animate-child">
-                  <button
+                  <NuxtLink
                     class="f-text-12-13 font-semibold uppercase rounded-0.5 max-w-xs bg-brand-accent border border-brand-accent text-white hover:bg-brand-accent/90 f-py-6-8 f-px-24-32 tracking-wider hover:ease-in-out transition-colors duration-300"
                     aria-label="View our menu button"
+                    to="/menu"
                   >
                     View our menu
-                  </button>
+                  </NuxtLink>
                   <AnimatedButton
                     text="Book a reservation"
                     aria-label="Book a reservation button"
                     button-class="border-1 border-brand-accent bg-transparent hover:ease-in-out text-brand-accent"
+                    to="/reservations"
                   />
                 </div>
               </div>
@@ -137,16 +139,18 @@ useSeoMeta({
                     forkful is a celebration of character and craft.
                   </p>
                   <div class="flex space-x-4 animate-child">
-                    <button
+                    <NuxtLink
                       class="f-text-12-13 font-semibold uppercase rounded-0.5 max-w-xs bg-brand-accent border border-brand-accent text-white hover:bg-brand-accent/90 f-py-6-8 f-px-24-32 tracking-wider hover:ease-in-out transition-colors duration-300"
                       aria-label="View our menu button"
+                      to="/menu"
                     >
                       View our menu
-                    </button>
+                    </NuxtLink>
                     <AnimatedButton
                       text="Book a reservation"
                       aria-label="Book a reservation button"
                       button-class="border-1 border-brand-accent bg-transparent hover:ease-in-out text-brand-accent"
+                      to="/reservations"
                     />
                   </div>
                 </div>
@@ -175,17 +179,18 @@ useSeoMeta({
               >
                 <template #title />
                 <template #buttons>
-                  <button
+                  <NuxtLink
                     class="f-text-12-13 font-semibold uppercase rounded-0.5 max-w-xs bg-brand-accent border border-brand-accent text-white hover:bg-brand-accent/90 f-py-6-8 f-px-24-32 tracking-wider hover:ease-in-out transition-colors duration-300"
                     aria-label="View our menu button"
+                    to="/menu"
                   >
                     View our menu
-                  </button>
-
+                  </NuxtLink>
                   <BaseAnimatedButton
                     text="Book a reservation"
                     aria-label="Book a reservation button"
                     button-class="border-1 border-brand-accent bg-transparent hover:ease-in-out text-brand-accent"
+                    to="/reservations"
                   />
                 </template>
               </BaseContentWithDivider>
@@ -215,16 +220,18 @@ useSeoMeta({
                     the kind of Southern sweetness that keeps you coming back.
                   </p>
                   <div class="animate-child flex flex-row gap-4">
-                    <button
+                    <NuxtLink
                       class="f-text-12-13 font-semibold uppercase rounded-0.5 max-w-xs bg-brand-accent border border-brand-accent text-white hover:bg-brand-accent/90 f-py-6-8 f-px-24-32 tracking-wider hover:ease-in-out transition-colors duration-300"
                       aria-label="View our menu button"
+                      to="/menu"
                     >
                       View our menu
-                    </button>
+                    </NuxtLink>
                     <AnimatedButton
                       text="Book a reservation"
                       aria-label="Book a reservation button"
                       button-class="border-1 border-brand-accent bg-transparent hover:ease-in-out text-brand-accent"
+                      to="/reservations"
                     />
                   </div>
                 </div>
