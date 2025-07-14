@@ -33,7 +33,7 @@ const prevSlide = () => swiperRef.value?.slidePrev()
 </script>
 
 <template>
-  <div class="features-slider-carousel f-py-60-100 w-full">
+  <div class="features-slider-carousel f-py-160-180 w-full">
     <Swiper
       ref="swiperRef"
       :touch-ratio="2"
@@ -55,12 +55,12 @@ const prevSlide = () => swiperRef.value?.slidePrev()
       @swiper="onSwiperReady"
       class="w-full"
       :style="{ height }"
+      data-grid
     >
       <SwiperSlide
         v-for="(slide, index) in slides"
         :key="index"
         class="relative overflow-hidden hover:cursor-pointer"
-        data-grid
       >
         <NuxtImg
           :src="slide"

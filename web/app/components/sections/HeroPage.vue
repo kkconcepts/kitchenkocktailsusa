@@ -62,7 +62,7 @@ onMounted(() => {
           :src="slide.src"
           :alt="slide.alt"
           format="webp"
-          class="slide-image"
+          class="slide-image hero-image"
           data-speed="0.9"
         />
       </div>

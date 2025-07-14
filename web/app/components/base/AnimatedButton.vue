@@ -3,9 +3,6 @@
     class="button f-text-12-13 font-semibold uppercase rounded-0.5 max-w-xs bg-brand-accent border border-brand-accent text-brand-accent f-py-6-8 f-px-16-20 tracking-wider transition-colors duration-300"
     :class="buttonClass"
     :aria-label="ariaLabel"
-    :to="to"
-    :target="external ? '_blank' : undefined"
-    :rel="external ? 'noopener noreferrer' : undefined"
   >
     <span>{{ text }}</span>
   </NuxtLink>
@@ -27,14 +24,6 @@ const props = defineProps({
   ariaLabel: {
     type: String,
     default: 'Button'
-  },
-  to: {
-    type: [String, Object],
-    default: '#'
-  },
-  external: {
-    type: Boolean,
-    default: false
   }
 })
 

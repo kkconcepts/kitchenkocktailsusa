@@ -41,11 +41,15 @@ const { getToastUrl } = useToast()
           <!-- Menu Grid Section -->
           <div class="py-6">
             <!-- Grid Container -->
-            <div id="main-content" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div
+              id="main-content"
+              class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+              data-grid
+            >
               <div
                 v-for="item in menuByCategory[type.value]"
                 :key="item._id"
-                class="bg-dark-600 shadow-lg menu-card flex flex-col h-full"
+                class="bg-dark-600 shadow-lg menu-card animate-item flex flex-col h-full"
                 ref="menuCards"
               >
                 <NuxtLink :to="`/menu/${item.slug}`" class="block h-44">

@@ -2,7 +2,6 @@
 import { ref } from 'vue'
 import { ogImage } from '~/constants'
 import { useParallaxEffects } from '~/composables/useParallaxEffects'
-import { useFirstScreenAnimation } from '~/composables/useFirstScreenAnimation'
 import { useScrollContentAnimation } from '~/composables/useScrollContentAnimation'
 import { useScrollGridAnimation } from '~/composables/useScrollGridAnimation'
 import FeaturesSliderCarousel from '~/components/features/SliderCarousel.vue'
@@ -24,10 +23,6 @@ const imageSlides = [
 useScrollContentAnimation()
 useScrollGridAnimation()
 useParallaxEffects()
-
-onMounted(async () => {
-  await useFirstScreenAnimation('.page-content') // or whatever wraps your content
-})
 
 const title = ref('About')
 const pageDescription = ref(
@@ -102,7 +97,6 @@ useSeoMeta({
                   class="f-text-12-13 font-semibold uppercase rounded-0.5 max-w-xs bg-brand-accent border border-brand-accent text-white hover:bg-brand-accent/90 f-py-6-8 f-px-24-32 tracking-wider hover:ease-in-out transition-colors duration-300"
                   aria-label="View our menu button"
                   to="/menu"
-                  @click.native.prevent="$router.push('/menu')"
                 >
                   View our menu
                 </NuxtLink>

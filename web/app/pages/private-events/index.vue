@@ -2,7 +2,6 @@
 import { ref } from 'vue'
 import { ogImage } from '~/constants'
 import { useParallaxEffects } from '~/composables/useParallaxEffects'
-import { useFirstScreenAnimation } from '~/composables/useFirstScreenAnimation'
 import { useScrollContentAnimation } from '~/composables/useScrollContentAnimation'
 import { transition } from '~/utils/transition'
 
@@ -12,10 +11,6 @@ definePageMeta({
 
 useScrollContentAnimation()
 useParallaxEffects()
-
-onMounted(async () => {
-  await useFirstScreenAnimation('.page-content')
-})
 
 const title = ref('Private Events')
 const pageDescription = ref(
@@ -35,7 +30,6 @@ useSeoMeta({
 
 <template>
   <div class="page-content min-h-screen bg-black text-white">
-    <!-- hero content -->
     <section>
       <LayoutContain>
         <div class="f-py-160-180">

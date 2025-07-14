@@ -3,8 +3,8 @@ import { ref, computed } from 'vue'
 import { ogImage } from '~/constants'
 import { locations } from '~/utils/locations'
 import { useParallaxEffects } from '~/composables/useParallaxEffects'
-import { useFirstScreenAnimation } from '~/composables/useFirstScreenAnimation'
 import { useScrollContentAnimation } from '~/composables/useScrollContentAnimation'
+import { useScrollGridAnimation } from '~/composables/useScrollGridAnimation'
 import { transition } from '~/utils/transition'
 
 definePageMeta({
@@ -17,10 +17,7 @@ const pageDescription =
 
 useScrollContentAnimation()
 useParallaxEffects()
-
-onMounted(async () => {
-  await useFirstScreenAnimation('.page-content') // or whatever wraps your content
-})
+useScrollGridAnimation()
 
 // Set up page metadata
 useSeoMeta({
@@ -45,14 +42,14 @@ const filteredLocations = computed(() => {
 </script>
 
 <template>
-  <div class="bg-black">
+  <div class="page-content relative">
     <section class="locations">
       <LayoutContain class="f-py-160-180">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 fade-group">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" data-grid>
           <div
             v-for="location in filteredLocations"
             :key="location.city"
-            class="bg-dark-800 rounded-1 shadow-sm backdrop-blur-10 overflow-hidden"
+            class="bg-dark-800 rounded-1 shadow-sm backdrop-blur-10 overflow-hidden animate-item"
           >
             <div class="relative h-48">
               <NuxtImg

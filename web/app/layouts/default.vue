@@ -1,9 +1,14 @@
 <script setup>
 import { useScrollSmoother } from '~/composables/useScrollSmoother'
 import { usePageClasses } from '~/composables/usePageClasses'
+import { useFirstScreenAnimation } from '~/composables/useFirstScreenAnimation'
 
 useScrollSmoother()
 const pageClasses = usePageClasses()
+
+onMounted(async () => {
+  await useFirstScreenAnimation('.page-content')
+})
 </script>
 
 <template>

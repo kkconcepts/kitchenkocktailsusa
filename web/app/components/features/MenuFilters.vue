@@ -73,19 +73,19 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="w-full py-4">
+  <div class="w-full py-4 bg-dark-700">
     <LayoutContainAlt>
       <div class="grid md:grid-cols-3 gap-4">
         <!-- Search Filter -->
         <div class="relative">
           <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <Icon name="uil:search" class="h-5 w-5 text-stone-400" />
+            <Icon name="uil:search" class="h-5 w-5 text-gray-400" />
           </div>
           <input
             type="text"
             :value="searchQuery"
             @input="emit('update:searchQuery', $event.target.value)"
-            class="block w-full pl-10 pr-3 py-2 border border-stone-200 rounded-md text-sm placeholder-stone-500 focus:outline-none focus:ring-1 focus:ring-brand-accent focus:border-brand-accent"
+            class="block w-full pl-10 pr-3 py-2 border border-dark-500 rounded-md text-sm placeholder-gray-400 bg-dark-600 text-white focus:outline-none focus:ring-1 focus:ring-brand-accent focus:border-brand-accent"
             placeholder="Search menu items..."
           />
         </div>
@@ -93,38 +93,38 @@ onUnmounted(() => {
         <!-- City Filter -->
         <div class="relative">
           <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <Icon name="uil:location-point" class="h-5 w-5 text-stone-400" />
+            <Icon name="uil:location-point" class="h-5 w-5 text-gray-400" />
           </div>
           <select
             :value="selectedCity"
             @change="emit('update:selectedCity', $event.target.value)"
-            class="block w-full pl-10 pr-10 py-2 border border-stone-200 rounded-md text-sm appearance-none focus:outline-none focus:ring-1 focus:ring-brand-accent focus:border-brand-accent"
+            class="block w-full pl-10 pr-10 py-2 border border-dark-500 rounded-md text-sm appearance-none bg-dark-600 text-white focus:outline-none focus:ring-1 focus:ring-brand-accent focus:border-brand-accent"
           >
             <option v-for="city in citiesFilter" :key="city.value" :value="city.value">
               {{ city.label }}
             </option>
           </select>
           <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-            <Icon name="uil:angle-down" class="h-5 w-5 text-stone-400" />
+            <Icon name="uil:angle-down" class="h-5 w-5 text-gray-400" />
           </div>
         </div>
 
         <!-- Type Filter -->
         <div class="relative">
           <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <Icon name="uil:apps" class="h-5 w-5 text-stone-400" />
+            <Icon name="uil:apps" class="h-5 w-5 text-gray-400" />
           </div>
           <select
             :value="selectedType"
             @change="emit('update:selectedType', $event.target.value)"
-            class="block w-full pl-10 pr-10 py-2 border border-stone-200 rounded-md text-sm appearance-none focus:outline-none focus:ring-1 focus:ring-brand-accent focus:border-brand-accent"
+            class="block w-full pl-10 pr-10 py-2 border border-dark-500 rounded-md text-sm appearance-none bg-dark-600 text-white focus:outline-none focus:ring-1 focus:ring-brand-accent focus:border-brand-accent"
           >
             <option v-for="type in productTypes" :key="type.value" :value="type.value">
               {{ type.label }}
             </option>
           </select>
           <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-            <Icon name="uil:angle-down" class="h-5 w-5 text-stone-400" />
+            <Icon name="uil:angle-down" class="h-5 w-5 text-gray-400" />
           </div>
         </div>
       </div>

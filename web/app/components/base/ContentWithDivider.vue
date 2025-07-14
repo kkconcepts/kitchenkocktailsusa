@@ -23,6 +23,10 @@ const props = defineProps({
   dividerColor: {
     type: String,
     default: 'bg-brand-accent'
+  },
+  titleSize: {
+    type: String,
+    default: 'text-4xl'
   }
 })
 </script>
@@ -49,15 +53,15 @@ const props = defineProps({
 
           <h3
             v-if="title"
-            class="animate-child text-4xl font-gt-ultra text-start uppercase tracking-wide mb-12"
+            :class="[
+              titleSize,
+              'animate-child font-gt-ultra text-start uppercase tracking-wide mb-12'
+            ]"
           >
             <slot name="title">{{ title }}</slot>
           </h3>
 
-          <p
-            v-if="description"
-            class="animate-child font-light max-w-xl leading-snug f-text-15-16 mb-8"
-          >
+          <p v-if="description" class="animate-child max-w-xl leading-snug f-text-14-15 mb-8">
             {{ description }}
           </p>
 

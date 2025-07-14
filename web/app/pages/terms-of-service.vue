@@ -1,14 +1,11 @@
 <script setup>
 import { ogImage } from '~/constants'
-import { useParallaxEffects } from '~/composables/useParallaxEffects'
 import { ref } from 'vue'
 import { transition } from '~/utils/transition'
 
 definePageMeta({
   pageTransition: transition
 })
-
-useParallaxEffects()
 
 const title = ref('Terms of Service')
 const pageDescription = ref(

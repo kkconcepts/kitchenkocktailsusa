@@ -106,22 +106,3 @@ body {
     margin-right: calc(100vw - 100%);
   }
 }
-
-.app-header.inverted {
-  background-color: white;
-  color: black;
-}
-
-.app-header.inverted .header-element {
-  color: black;
-}
-
-.app-header.inverted .nav-item {
-  color: black;
-}
-
-.app-header.inverted button {
-  background-color: black;
-  color: white;
-  border-color: black;
-}

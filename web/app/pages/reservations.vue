@@ -2,7 +2,6 @@
 import { ref } from 'vue'
 import { ogImage } from '~/constants'
 import { useParallaxEffects } from '~/composables/useParallaxEffects'
-import { useFirstScreenAnimation } from '~/composables/useFirstScreenAnimation'
 import { useScrollContentAnimation } from '~/composables/useScrollContentAnimation'
 import { transition } from '~/utils/transition'
 
@@ -15,7 +14,6 @@ const pageDescription = ref(
   'Experience soulful Southern dining with a modern twist. Discover our signature cocktails, bold flavors, and vibrant atmosphere.'
 )
 
-useFirstScreenAnimation()
 useScrollContentAnimation()
 useParallaxEffects()
 
@@ -45,13 +43,16 @@ useSeoMeta({
 
             <div>
               <h2 class="text-2xl font-gt-ultra tracking-wide mb-4 uppercase">Large Parties</h2>
-              <p class="">General Inquiries:</p>
+              <p class="mb-4 f-text-13-14 max-w-xs">
+                Contact our reservations team to inquire about hosting a private event
+              </p>
               <NuxtLink
-                href="mailto:info@kitchenkocktailsusa.com"
-                class="hover:opacity-60 transition-opacity duration-300 ease-in-out"
+                class="f-text-12-13 font-semibold uppercase rounded-0.5 max-w-xs bg-brand-accent border border-brand-accent text-white hover:bg-brand-accent/90 f-py-6-8 f-px-24-32 tracking-wider hover:ease-in-out transition-colors duration-300"
+                aria-label="View our menu button"
+                to="/private-events/make-a-request"
               >
-                info@kitchenkocktailsusa.com
-              </NuxtLink> 
+                Request a Reservation
+              </NuxtLink>
             </div>
 
             <div>

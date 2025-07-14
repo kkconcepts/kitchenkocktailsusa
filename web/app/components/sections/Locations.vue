@@ -59,7 +59,7 @@ const visibleLocations = computed(() => {
 </script>
 
 <template>
-  <div>
+  <section>
     <LayoutContain class="f-pt-32-48 mx-auto max-w-90rem f-py-160-180 min-h-80vh">
       <div class="w-full h-full">
         <div class="flex flex-col w-full mb-15">
@@ -119,7 +119,7 @@ const visibleLocations = computed(() => {
           </div>
         </div>
       </div>
-      <div class="relative min-h-15rem">
+      <div class="relative min-h-15rem" data-grid>
         <Transition name="fade" mode="out-in">
           <div
             :key="currentSlide"
@@ -134,7 +134,7 @@ const visibleLocations = computed(() => {
                 <NuxtImg
                   :src="location.imageUrl"
                   :alt="location.city"
-                  class="w-full h-full object-cover transition-transform"
+                  class="w-full h-full object-cover transition-transform animate-item"
                   quality="80"
                   format="webp"
                 />
@@ -195,7 +195,7 @@ const visibleLocations = computed(() => {
         </Transition>
       </div>
     </LayoutContain>
-  </div>
+  </section>
 </template>
 
 <style scoped>

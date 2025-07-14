@@ -1,5 +1,4 @@
 <script setup>
-import { onBeforeUnmount } from 'vue'
 import { ogImage } from '~/constants'
 import { transition } from '~/utils/transition'
 

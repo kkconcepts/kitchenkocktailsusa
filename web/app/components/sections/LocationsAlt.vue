@@ -59,7 +59,7 @@ const visibleLocations = computed(() => {
 </script>
 
 <template>
-  <div class="text-white">
+  <section>
     <LayoutContain class="f-pt-32-48 mx-auto max-w-90rem f-py-64-96">
       <div class="w-full">
         <div class="flex flex-col w-full stagger-container mb-12">
@@ -187,7 +187,7 @@ const visibleLocations = computed(() => {
         </Transition>
       </div>
     </LayoutContain>
-  </div>
+  </section>
 </template>
 
 <style scoped>

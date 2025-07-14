@@ -8,6 +8,6 @@
 .content {
   margin: 0 auto;
   width: 100%;
-  height: auto;
+  height: 100%;
 }
 </style>

@@ -19,10 +19,9 @@ export const useScrollGridAnimation = () => {
         once: true,
         animation: gsap.from(items, {
           opacity: 0,
-          y: 50,
-          stagger: 0.1,
-          duration: 0.6,
-          ease: 'power2.out'
+          stagger: 0.05,
+          duration: 0.8,
+          ease: 'power1.out'
         })
       })
     })

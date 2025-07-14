@@ -1,11 +1,16 @@
-import type { RouterConfig } from '@nuxt/schema'
+import type {
+  RouteLocationNormalized,
+  RouteLocationNormalizedLoaded,
+  RouterScrollBehavior
+} from 'vue-router'
 
-export default <RouterConfig>{
-  scrollBehavior(to, from, savedPosition) {
-    // optional: preserve position when using back/forward navigation
+export default {
+  scrollBehavior(
+    to: RouteLocationNormalized,
+    from: RouteLocationNormalized,
+    savedPosition: Awaited<ReturnType<RouterScrollBehavior>>
+  ): ReturnType<RouterScrollBehavior> {
     if (savedPosition) return savedPosition
-
-    // otherwise, prevent native scroll and let ScrollSmoother handle it
     return false
   }
 }

@@ -56,11 +56,20 @@ watch(isMenuOpen, (open) => {
         <!-- Keep this wrapping div for layout alignment -->
         <div class="w-full flex justify-end items-center col-span-2 gap-6">
           <NuxtLink
-            class="uppercase f-text-12-13 font-semibold py-2 px-4 rounded-sm bg-white text-black"
+            class="uppercase f-text-12-13 font-semibold py-2 px-5 rounded-sm bg-white text-black"
             aria-label="Make a reservation button"
             to="/reservations"
           >
-            Make a reservation
+            Reserve a table
+          </NuxtLink>
+          <NuxtLink
+            to="https://www.instagram.com/kitchenkocktailsusa/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
+            class="flex items-center"
+          >
+            <Icon name="uil:instagram" class="w-4.5 h-4.5 transition-opacity duration-300" />
           </NuxtLink>
           <button
             ref="buttonRef"

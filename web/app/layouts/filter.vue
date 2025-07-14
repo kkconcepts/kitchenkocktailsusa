@@ -1,4 +1,10 @@
 <script setup>
+import { useScrollSmoother } from '~/composables/useScrollSmoother'
+import { usePageClasses } from '~/composables/usePageClasses'
+
+useScrollSmoother()
+const pageClasses = usePageClasses()
+
 import { useMenuFilter } from '~/composables/useMenuFilter'
 
 const { searchQuery, selectedCity, selectedType } = useMenuFilter()
@@ -15,6 +21,15 @@ const { searchQuery, selectedCity, selectedType } = useMenuFilter()
         />
       </template>
     </AppHeader>
-    <slot />
+    <div :class="pageClasses">
+      <div id="smooth-wrapper">
+        <div id="smooth-content">
+          <main role="main" class="main">
+            <slot />
+            <AppFooterAlt />
+          </main>
+        </div>
+      </div>
+    </div>
   </div>
 </template>

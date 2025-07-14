@@ -1,9 +1,7 @@
 <script setup>
 import { ogImage } from '~/constants'
-import { useContact } from '~/composables/useContact'
 import { ref } from 'vue'
 import { useParallaxEffects } from '~/composables/useParallaxEffects'
-import { useFirstScreenAnimation } from '~/composables/useFirstScreenAnimation'
 import { useScrollContentAnimation } from '~/composables/useScrollContentAnimation'
 import { transition } from '~/utils/transition'
 
@@ -13,10 +11,6 @@ definePageMeta({
 
 useScrollContentAnimation()
 useParallaxEffects()
-
-onMounted(async () => {
-  await useFirstScreenAnimation('.page-content') // or whatever wraps your content
-})
 
 const title = ref('Contact')
 const pageDescription = ref(
